@@ -8,6 +8,7 @@ tv-foundation = "1.0.0-alpha07"
 tv-material = "1.0.0-alpha07"
 lifecycle-runtime-ktx = "2.7.0"
 activity-compose = "1.8.2"
+coil = "2.6.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -21,7 +22,7 @@ tv-foundation = { group = "androidx.tv", name = "tv-foundation", version.ref = "
 tv-material = { group = "androidx.tv", name = "tv-material", version.ref = "tv-material" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
-
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
