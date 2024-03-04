@@ -28,6 +28,18 @@ android {
                 "proguard-rules.pro"
             )
         }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
+        create("benchmark1") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -43,6 +55,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
+        pickFirst ("META-INF/gradle/incremental.annotation.processors")
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
