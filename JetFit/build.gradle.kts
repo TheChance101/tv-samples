@@ -18,11 +18,13 @@
 /*
     Please refer to the following URL for the details of
     "can't be called in this context by implicit receiver" errors,
-    which will be fixed with Gradle 8.1 or later.  
-
+    which will be fixed with Gradle 8.1 or later.
     https://youtrack.jetbrains.com/issue/KTIJ-19369/
  */
 plugins {
     alias(libs.plugins.androidApplication) apply(false)
     alias(libs.plugins.kotlinAndroid) apply(false)
+    alias(libs.plugins.kotlin.serialization) apply(false)
+    alias(libs.plugins.hilt) apply(false)
+    alias(libs.plugins.ksp) apply false
 }

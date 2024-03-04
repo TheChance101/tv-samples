@@ -44,6 +44,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
+        pickFirst ("META-INF/gradle/incremental.annotation.processors")
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -64,4 +65,25 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+
+    // SplashScreen
+    implementation(libs.androidx.core.splashscreen)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.compiler)
+
+    // ViewModel in Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Compose Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // JSON parser
+    implementation(libs.kotlinx.serialization)
+
 }
