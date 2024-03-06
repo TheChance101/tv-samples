@@ -11,11 +11,3 @@ import dagger.hilt.components.SingletonComponent
 
 @HiltAndroidApp
 class JetFitApplication : Application()
-@InstallIn(SingletonComponent::class)
-@Module
-abstract class JetFitRepositoryModule {
-    @Binds
-    abstract fun bindMovieRepository(
-        jetFitImpl: JetFitImpl
-    ): JetFitRepository
-}
