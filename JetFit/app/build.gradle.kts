@@ -87,7 +87,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // ViewModel in Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
