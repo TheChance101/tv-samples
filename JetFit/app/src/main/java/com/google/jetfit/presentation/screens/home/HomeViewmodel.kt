@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val jetFitRepository: JetFitRepository
-):ViewModel() {
+) : ViewModel() {
     private val _state: MutableStateFlow<HomeUiState> by lazy { MutableStateFlow(HomeUiState()) }
     val state = _state.asStateFlow()
 
@@ -25,7 +25,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    sessions = jetFitRepository.getSessions()
+                    sessions = jetFitRepository.getSessions(),
+                    categories = jetFitRepository.getCategories()
                 )
             }
         }
