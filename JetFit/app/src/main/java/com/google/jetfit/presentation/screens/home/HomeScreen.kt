@@ -1,6 +1,5 @@
 package com.google.jetfit.presentation.screens.home
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +20,7 @@ import androidx.tv.material3.CarouselState
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import com.google.jetfit.presentation.screens.home.components.HomeCategory
 import com.google.jetfit.presentation.screens.home.components.SessionsCard
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -51,24 +51,27 @@ private fun HomeContent(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.spacedBy(32.dp),
-        contentPadding = PaddingValues(horizontal = 58.dp, vertical = 36.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp)
     ) {
         item {
             SessionsCard(
                 sessions = state.sessions,
-                padding = PaddingValues(),
-                onCLickStartSession = {
-                    Log.d("Ameerxyz", "Session details")
-                },
+                padding = PaddingValues(horizontal = 58.dp, vertical = 36.dp),
+                onCLickStartSession = { },
                 carouselState = carouselState,
                 modifier = Modifier.aspectRatio(21F / 9F)
             )
         }
         item {
+            HomeCategory(
+                categories = state.categories,
+                onClick = {}
+            )
+        }
+        item {
             TvLazyRow() {
                 items(state.sessions.size) {
-                    Card(onClick = { /*TODO*/ }) {
+                    Card(onClick = { }) {
                         Text(text = state.sessions[it].title)
                     }
                 }
