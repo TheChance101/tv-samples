@@ -56,7 +56,8 @@ fun CustomCard(
                 model = imageUrl, contentDescription = "Image",
                 modifier = Modifier
                     .fillMaxSize()
-                    .height(110.25.dp),
+                    .height(110.25.dp)
+                    .aspectRatio(cardAspectRatio),
                 contentScale = ContentScale.Fit,
                 alignment = Alignment.Center,
             )
