@@ -26,13 +26,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
 import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.Carousel
 import androidx.tv.material3.CarouselDefaults
@@ -209,26 +213,44 @@ private fun CarouselItemForeground(
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun CarouselItemBackground(session: Session, modifier: Modifier = Modifier) {
-    val colorBackground = MaterialTheme.colorScheme.background
+    var sizeCard by remember { mutableStateOf(Size.Zero) }
     AsyncImage(
         model = session.imageUrl,
-        contentDescription = "image",
-        modifier = modifier.drawWithContent {
-            drawContent()
-            drawRect(
-                Brush.horizontalGradient(
-                    colors = listOf(
-                        colorBackground,
-                        colorBackground.copy(alpha = 1f),
-                        colorBackground.copy(alpha = 0.9f),
-                        Color.Transparent,
+        contentDescription = stringResource(id = R.string.image, session.title),
+        modifier = modifier
+            .fillMaxSize()
+            .onGloballyPositioned { coordinates ->
+                sizeCard = coordinates.size.toSize()
+            }
+            .drawWithContent {
+                drawContent()
+                drawRect(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color(0x00395B77),
+                            Color(0x1F395B77),
+                        ),
+                        center = Offset(sizeCard.width, -(sizeCard.width * .35F)),
+                        radius = sizeCard.width * .75f,
                     )
                 )
-            )
-        },
+
+            }
+            .drawWithContent {
+                drawContent()
+                drawRect(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color(0x1A191C1B),
+                            Color(0xFF191C1B),
+                        ),
+                        center = Offset(sizeCard.width, -(sizeCard.width * .35F)),
+                        radius = sizeCard.width * .75f,
+                    )
+                )
+            },
         contentScale = ContentScale.Crop
     )
 }

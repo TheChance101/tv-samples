@@ -3,4 +3,5 @@
     <string name="start_session">Start session</string>
     <string name="categories">Categories</string>
     <string name="recommended_for_you">Recommended for you</string>
+    <string name="image">Image %1$s</string>
 </resources>
