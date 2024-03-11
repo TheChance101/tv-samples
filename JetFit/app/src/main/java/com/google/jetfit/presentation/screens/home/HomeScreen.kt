@@ -14,13 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.tv.foundation.lazy.list.TvLazyColumn
-import androidx.tv.foundation.lazy.list.TvLazyRow
-import androidx.tv.material3.Card
 import androidx.tv.material3.CarouselState
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
-import androidx.tv.material3.Text
-import com.google.jetfit.presentation.screens.home.components.HomeCategory
+import com.google.jetfit.presentation.screens.home.components.CategoryCard
+import com.google.jetfit.presentation.screens.home.components.RecommendedCard
 import com.google.jetfit.presentation.screens.home.components.SessionsCard
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -51,7 +49,7 @@ private fun HomeContent(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.spacedBy(32.dp)
+        verticalArrangement = Arrangement.spacedBy(40.dp)
     ) {
         item {
             SessionsCard(
@@ -63,19 +61,18 @@ private fun HomeContent(
             )
         }
         item {
-            HomeCategory(
+            CategoryCard(
+                modifier = Modifier.aspectRatio(28f / 8f),
                 categories = state.categories,
                 onClick = {}
             )
         }
         item {
-            TvLazyRow() {
-                items(state.sessions.size) {
-                    Card(onClick = { }) {
-                        Text(text = state.sessions[it].title)
-                    }
-                }
-            }
+            RecommendedCard(
+                modifier = Modifier.aspectRatio(16f / 9f),
+                cards = state.recommended,
+                onClick = {}
+            )
         }
 
     }
