@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,13 +33,13 @@ import com.google.jetfit.data.entities.Category
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun CategoryCard(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     categories: List<Category>,
-    onClick: (Category) -> Unit
+    onClick: (String) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Text(
-            modifier = Modifier.padding(start = 58.dp),
+            modifier = Modifier.padding(start = 32.dp),
             text = stringResource(R.string.categories),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
@@ -48,13 +48,13 @@ fun CategoryCard(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(24.dp),
             verticalAlignment = Alignment.CenterVertically,
-            contentPadding = PaddingValues(horizontal = 58.dp)
+            contentPadding = PaddingValues(horizontal = 32.dp)
         ) {
             items(categories) { category ->
                 CategoryItem(
                     modifier = modifier,
                     category = category,
-                    onClick = { onClick(category) }
+                    onClick = { onClick(category.id) }
                 )
             }
         }
@@ -65,7 +65,7 @@ fun CategoryCard(
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun CategoryItem(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     category: Category,
     onClick: () -> Unit
 ) {
@@ -83,16 +83,16 @@ fun CategoryItem(
         ) {
             AsyncImage(
                 modifier = modifier
-                    .fillMaxSize()
+                    .size(280.dp, 80.dp)
                     .drawWithContent {
                         drawContent()
                         drawRect(Brush.horizontalGradient(colorStops = gradiantColors))
                     },
                 model = category.imageUrl,
                 contentDescription = null,
-                contentScale = ContentScale.FillBounds
+                contentScale = ContentScale.Crop
             )
-            Column(modifier = Modifier.padding(start = 18.dp)) {
+            Column(modifier = Modifier.padding(start = 16.dp)) {
                 Text(
                     modifier = Modifier.width(180.dp),
                     text = category.title,

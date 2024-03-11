@@ -62,7 +62,6 @@ private fun HomeContent(
         }
         item {
             CategoryCard(
-                modifier = Modifier.aspectRatio(28f / 8f),
                 categories = state.categories,
                 onClick = {}
             )
@@ -70,12 +69,8 @@ private fun HomeContent(
         item {
             TrainingsRecommended(
                 state = state.recommended,
-                modifier = Modifier,
                 onClick = {}
             )
         }
-
     }
-
-
 }

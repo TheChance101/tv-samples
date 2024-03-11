@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.foundation.lazy.list.TvLazyRow
 import androidx.tv.foundation.lazy.list.items
@@ -19,53 +19,52 @@ import androidx.tv.material3.Text
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomCard
 import com.google.jetfit.data.entities.Training
-import com.google.jetfit.presentation.theme.JetFitTheme
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun TrainingsRecommended(
-    state: List<Training>,
-    onClick: (String) -> Unit,
     modifier: Modifier = Modifier,
+    state: List<Training>,
+    onClick: (String) -> Unit
 ) {
     val firstList = state.split().first
     val secondList = state.split().second
 
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Text(
-            modifier = modifier.padding(start = 58.dp),
+            modifier = Modifier.padding(start = 32.dp),
             text = stringResource(R.string.recommended_for_you),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
-
         ItemsTrainingsRecommended(
-            state = firstList,
+            modifier = modifier,
+            items = firstList,
             onClick = onClick
         )
         ItemsTrainingsRecommended(
-            state = secondList,
+            modifier = modifier,
+            items = secondList,
             onClick = onClick
         )
-
     }
 }
 
 @Composable
 private fun ItemsTrainingsRecommended(
-    state: List<Training>,
-    onClick: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    items: List<Training>,
+    onClick: (String) -> Unit
 ) {
     TvLazyRow(
-        modifier = modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(24.dp),
         verticalAlignment = Alignment.CenterVertically,
         contentPadding = PaddingValues(horizontal = 32.dp)
     ) {
-        items(state) { training ->
+        items(items) { training ->
             CustomCard(
-                modifier = modifier,
+                modifier = modifier.width(196.dp),
                 imageUrl = training.imageUrl,
                 title = training.title,
                 timeText = training.time,
@@ -83,24 +82,4 @@ private fun <T> List<T>.split(): Pair<List<T>, List<T>> {
         return Pair(first, second)
     }
     return Pair(listOf(), listOf())
-}
-
-@Preview
-@Composable
-private fun TrainingsRecommendedPreview() {
-    JetFitTheme {
-        TrainingsRecommended(
-            state = listOf(
-                Training(
-                    id = "1",
-                    instructor = "Intensity",
-                    title = "Full body strength",
-                    time = "26 Min",
-                    imageUrl = "https://s3-alpha-sig.figma.com/img/c823/37df/f97a3d198ca7a463a530cdf43275e329?Expires=1710720000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=k9CLo2xpsEn07zCJElLridjmm4QdPO~oGTfQmSV1upDJZUteGoeHO~nvz8Jx7ZfZUiSyfg2rxMAWQPPgHncj9I-gHWgy9UTYWbiWuYq7ynct-4jdFdgPr1ltdoFsBRJR1~I05Js~YQi8rOUTdZy--9saib9eF~zGz10kC274EI2VT3V3xsF7XWErz2IDQ5LyDaO5rC1cS4S5H3tvzu20QlW8Kh73VaMMW70HydqB-rPrBEwljC9l3nIx8PK7BUHXxoNj0xPHOizXd6DN-JlHspxoU6N40wz4OfZc9oar-ZLGbT3mwHZrRdM0pUoHoIMr1flai50tU1t6jl-qw2QVPw__",
-
-                    ),
-            ),
-            onClick = {}
-        )
-    }
 }
