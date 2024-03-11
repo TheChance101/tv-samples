@@ -49,12 +49,13 @@ private fun HomeContent(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.spacedBy(40.dp)
+        verticalArrangement = Arrangement.spacedBy(40.dp),
+        contentPadding = PaddingValues(vertical = 40.dp)
     ) {
         item {
             SessionsCard(
                 sessions = state.sessions,
-                padding = PaddingValues(horizontal = 58.dp, vertical = 36.dp),
+                padding = PaddingValues(horizontal = 32.dp),
                 onCLickStartSession = { },
                 carouselState = carouselState,
                 modifier = Modifier.aspectRatio(21F / 9F)

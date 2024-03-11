@@ -115,6 +115,20 @@ class JetFitImpl @Inject constructor() : JetFitRepository {
                 time = "16 Min",
                 imageUrl = "https://s3-alpha-sig.figma.com/img/9e9e/d62b/548d491bf82b615ac52bb7b20d5370e4?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dJze3SwfE-HrHmeHNtvBinGnwUPxkggi8VJXlOEn3MXWo0DI4SCZhSRkqiCpSvddAN9AdmEQefxW4vmXOAyZ5O7qAzEa6a~jTkWjv8VzLYIGxlOsEJBMeHYTcDi1btqIbBlFw174C3Alg-5qZUWHzMevwGc9G5HXSIRdGFGBRvOTNuOornVdDJyZLUnXnYOXLOw6pggp7kvlvdgqEKEU2AIRzFO-fTuogjQPM6sbwIkbLBoSQl~jiJJ-RxSC05cE3gMop~5GPdkqTqlPErii~OGwVUKdaMl2KvRwHxbaGG4v9ANy9gzfB2ySMLA6AC5c93XUMDaQb0PcjQGe9GMMlg__",
             ),
+            Training(
+                id = "1",
+                instructor = "Intensity",
+                title = "Interval 5 day split",
+                time = "16 Min",
+                imageUrl = "https://s3-alpha-sig.figma.com/img/aad6/dfa7/e5a9a9dd732084d30328dceec998666f?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Sr8NN2cvX3Bc~OmscqwR6VnQhe0Fri9~rM-D~i39wva-lyN6xG1ai7iNXYYa5Kn~uuDhyZ-0BvYVIM~Z2GciW~YMsZzPKyvfnMk92MZ3aVc1ik2fJmOG2SknBSxBuBO0lNRS0HNq-Zx~qe7JFfHC0gadAzzvCH4bB7sI01~HYYQzRjb9EYJdzkd9GkLXD9PaN0iN7in6QRDHSZdgrhT22J96TC3wxRH2mpfFsm3LYA0iSvdZgt6Zj11xrrLlfIvnGVST-SqYnpiv5ixoCHoS18N6Q0KALn7IBH3xk8MSWRnpdfwfjE-CtITEKfOc3YKOCkciHbuhasbdEYyNMHGGcg__",
+            ),
+            Training(
+                id = "1",
+                instructor = "Intensity",
+                title = "Working in the gym",
+                time = "20 Min",
+                imageUrl = "https://s3-alpha-sig.figma.com/img/e8c5/e762/261fdaee84066db90f2dcdea8f4b6272?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XpTP2A-yxY8hT91ub7tcc8KAhL7YQUAJnkFCbjU4K8Y3eLt4yqaZzbRmJEtOXKnr0LMWlRPxWafCsLpj79Bgx2lkzI9wl3tKpXI0prvUbl~SwdF5wDR-11A~abdY1ugr4AychRuiweXENGU~fGOvT6HERw2XEE5BD4BafAafDC3J0tNNxoVnG9p612zqMtJKdZpJLOci4O6KOjG51BGA9-Zzat32UtUWGyccUnGkWrPtEoUarnCcNjlJ6mFNYyAWB5GvqDLRF7~ngjVrUj48cF9JFB0OTlys3YGLtxqDsXgFyCeBt9BX8d8x0VVfhsXSd4sjl93FVa70hss9lOxHzA__",
+            )
         )
     }
 }
