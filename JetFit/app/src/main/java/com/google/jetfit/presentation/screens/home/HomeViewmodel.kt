@@ -26,7 +26,8 @@ class HomeViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     sessions = jetFitRepository.getSessions(),
-                    categories = jetFitRepository.getCategories()
+                    categories = jetFitRepository.getCategories(),
+                    recommended = jetFitRepository.getTrainingsRecommended()
                 )
             }
         }

@@ -18,8 +18,8 @@ import androidx.tv.material3.CarouselState
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import com.google.jetfit.presentation.screens.home.components.CategoryCard
-import com.google.jetfit.presentation.screens.home.components.RecommendedCard
 import com.google.jetfit.presentation.screens.home.components.SessionsCard
+import com.google.jetfit.presentation.screens.home.components.TrainingsRecommended
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 val carouselSaver =
@@ -68,9 +68,9 @@ private fun HomeContent(
             )
         }
         item {
-            RecommendedCard(
-                modifier = Modifier.aspectRatio(16f / 9f),
-                cards = state.recommended,
+            TrainingsRecommended(
+                state = state.recommended,
+                modifier = Modifier,
                 onClick = {}
             )
         }
