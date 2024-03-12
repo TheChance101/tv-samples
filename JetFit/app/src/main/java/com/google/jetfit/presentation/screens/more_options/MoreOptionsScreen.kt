@@ -29,15 +29,13 @@ fun MoreOptionsScreen(viewModel: MoreOptionsViewModel = hiltViewModel()) {
 @Composable
 private fun MoreOptionsContent() {
     Row(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
-
-            ) {
+        ) {
             TrainingDetails(
                 title = "Total-body balance pilates",
                 time = "34 Min  |  Intensity ••••",
@@ -50,11 +48,7 @@ private fun MoreOptionsContent() {
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MoreOptionsButton(
-                text = "Start workout",
-                icon = R.drawable.ic_rounded_play,
-                isSelected = true
-            )
+            MoreOptionsButton(text = "Start workout", icon = R.drawable.ic_rounded_play)
             MoreOptionsButton(text = "Add to favorites", icon = R.drawable.ic_outline_favorite)
             MoreOptionsButton(text = "More info", icon = R.drawable.ic_info)
             MoreOptionsButton(text = "View Instructor", icon = R.drawable.ic_instructor)

@@ -26,60 +26,39 @@ import com.google.jetfit.presentation.theme.JetFitTheme
 internal fun MoreOptionsButton(
     modifier: Modifier = Modifier,
     text: String = "",
-    isSelected: Boolean = false,
     @DrawableRes icon: Int,
     onClick: () -> Unit = {}
 ) {
-    if (isSelected) {
-        Button(
-            modifier = modifier.size(height = 50.dp, width = 292.dp),
-            shape = ButtonDefaults.shape(shape = RoundedCornerShape(12.dp)),
-            colors = ButtonDefaults.colors(
-                containerColor = MaterialTheme.colorScheme.onSurface
+    Button(
+        modifier = modifier.size(height = 50.dp, width = 292.dp),
+        shape = ButtonDefaults.shape(shape = RoundedCornerShape(12.dp)),
+        colors = ButtonDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.onSurface,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
+                0.4f
             ),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-            onClick = onClick
-        ) {
+            focusedContentColor = MaterialTheme.colorScheme.inverseOnSurface,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        ),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+        scale = ButtonDefaults.scale(
+            scale = 1f,
+            focusedScale = 1.1f,
+        ),
+        onClick = onClick
+    ) {
             Icon(
                 modifier = Modifier.size(20.dp),
                 painter = painterResource(id = icon),
                 contentDescription = "button icon",
-                tint = MaterialTheme.colorScheme.inverseOnSurface
             )
             Spacer(modifier = Modifier.width(12.dp))
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.inverseOnSurface
-            )
-        }
-    } else {
-        Button(
-            modifier = modifier.size(height = 48.dp, width = 268.dp),
-            shape = ButtonDefaults.shape(shape = RoundedCornerShape(12.dp)),
-            colors = ButtonDefaults.colors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
-                    0.4f
-                )
-            ),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-            onClick = onClick
-        ) {
-            Icon(
-                modifier = Modifier.size(20.dp),
-                painter = painterResource(id = icon),
-                contentDescription = "button icon",
-                tint = MaterialTheme.colorScheme.onSurface
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Text(
-                text = text,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
-}
 
 @Preview
 @Composable
@@ -88,19 +67,6 @@ private fun MoreOptionsButtonPreview() {
         MoreOptionsButton(
             text = "Add to favorites",
             icon = R.drawable.ic_outline_favorite,
-            isSelected = false
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun MoreOptionsSelectedButtonPreview() {
-    JetFitTheme {
-        MoreOptionsButton(
-            text = "Add to favorites",
-            icon =  R.drawable.ic_outline_favorite,
-            isSelected = true
         )
     }
 }
