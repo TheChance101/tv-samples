@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -34,6 +35,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
@@ -58,7 +60,7 @@ import com.google.jetfit.presentation.utils.withShadow
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun SessionsCard(
+fun Sessions(
     sessions: List<Session>,
     padding: PaddingValues,
     carouselState: CarouselState,
@@ -98,23 +100,23 @@ fun SessionsCard(
             )
         },
         contentTransformStartToEnd = fadeIn(tween(durationMillis = 1000)).togetherWith(
-            fadeOut(
-                tween(durationMillis = 1000)
-            )
+            fadeOut(tween(durationMillis = 1000))
         ),
         contentTransformEndToStart = fadeIn(tween(durationMillis = 1000)).togetherWith(
-            fadeOut(
-                tween(durationMillis = 1000)
-            )
+            fadeOut(tween(durationMillis = 1000))
         ),
 
         ) { index ->
 
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             val session = sessions[index]
-            CarouselItemBackground(session = session, modifier = Modifier.fillMaxSize())
+            CarouselItemBackground(
+                session = session,
+                modifier = Modifier.fillMaxSize()
+            )
             CarouselItemForeground(
                 session = session,
                 isCarouselFocused = isCarouselFocused,
@@ -191,6 +193,7 @@ private fun CarouselItemForeground(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             ),
             maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier.padding(top = 12.dp, bottom = 28.dp)
         )
 
@@ -221,6 +224,7 @@ private fun CarouselItemBackground(session: Session, modifier: Modifier = Modifi
         contentDescription = stringResource(id = R.string.image, session.title),
         modifier = modifier
             .fillMaxSize()
+            .aspectRatio(21F / 9F)
             .onGloballyPositioned { coordinates ->
                 sizeCard = coordinates.size.toSize()
             }
@@ -258,11 +262,11 @@ private fun CarouselItemBackground(session: Session, modifier: Modifier = Modifi
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Preview(widthDp = 1080)
 @Composable
-private fun SessionsCardPreview() {
+private fun SessionsPreview() {
     val carouselState = rememberSaveable(saver = carouselSaver) { CarouselState(0) }
 
     JetFitTheme {
-        SessionsCard(
+        Sessions(
             sessions = listOf(
                 Session(
                     id = "1",
