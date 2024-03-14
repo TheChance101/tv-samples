@@ -53,7 +53,7 @@ internal fun SubscriptionOption(
                 onClick = onClick,
                 colors = RadioButtonDefaults.colors(
                     selectedColor = MaterialTheme.colorScheme.secondary,
-                    unselectedColor = MaterialTheme.colorScheme.tertiary
+                    unselectedColor = MaterialTheme.colorScheme.border
                 )
             )
         }
