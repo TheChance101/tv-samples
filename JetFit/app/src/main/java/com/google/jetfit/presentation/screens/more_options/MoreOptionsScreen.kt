@@ -48,11 +48,20 @@ private fun MoreOptionsContent() {
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MoreOptionsButton(text = "Start workout", icon = R.drawable.ic_rounded_play)
-            MoreOptionsButton(text = "Add to favorites", icon = R.drawable.ic_outline_favorite)
-            MoreOptionsButton(text = "More info", icon = R.drawable.ic_info)
-            MoreOptionsButton(text = "View Instructor", icon = R.drawable.ic_instructor)
-            MoreOptionsButton(text = "Share", icon = R.drawable.ic_share)
+            MoreOptionsButton(
+                text = stringResource(R.string.start_workout),
+                icon = R.drawable.ic_rounded_play
+            )
+            MoreOptionsButton(
+                text = stringResource(R.string.add_to_favorites),
+                icon = R.drawable.ic_outline_favorite
+            )
+            MoreOptionsButton(text = stringResource(R.string.more_info), icon = R.drawable.ic_info)
+            MoreOptionsButton(
+                text = stringResource(R.string.view_instructor),
+                icon = R.drawable.ic_instructor
+            )
+            MoreOptionsButton(text = stringResource(R.string.share), icon = R.drawable.ic_share)
         }
     }
 }

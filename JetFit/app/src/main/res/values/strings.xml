@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">JetFit</string>
     <string name="training_desc">Andrea\'s signature low-impact, total-body class in just 30 minutes. Hit every muscle group with barre and Pilates moves that leave you feeling strong, refreshed, and energized</string>
+    <string name="start_workout">Start workout</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="more_info">More info</string>
+    <string name="view_instructor">View Instructor</string>
+    <string name="share">Share</string>
+    <string name="press">Press</string>
+    <string name="to_go_back">to go back</string>
 </resources>
