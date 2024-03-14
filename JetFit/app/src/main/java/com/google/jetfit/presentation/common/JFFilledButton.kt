@@ -13,9 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.tv.material3.Button
 import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
@@ -56,7 +58,10 @@ internal fun JFFilledButton(
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = buttonText,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        lineHeight = 22.sp,
+                        fontWeight = FontWeight.W500,
+                    ),
                     color = MaterialTheme.colorScheme.inverseOnSurface,
                     textAlign = TextAlign.Center
                 )
@@ -69,7 +74,10 @@ internal fun JFFilledButton(
             ) {
                 Text(
                     text = buttonText,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        lineHeight = 22.sp,
+                        fontWeight = FontWeight.W500,
+                    ),
                     color = MaterialTheme.colorScheme.inverseOnSurface,
                     textAlign = TextAlign.Center
                 )

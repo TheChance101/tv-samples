@@ -40,7 +40,11 @@ internal fun JFOutlineButton(
     OutlinedButton(
         modifier = modifier.height(40.dp),
         onClick = onClick,
-        colors = OutlinedButtonDefaults.colors(containerColor = Color.Transparent),
+        colors = OutlinedButtonDefaults.colors(
+            containerColor = Color.Transparent,
+            focusedContainerColor = Color.Transparent,
+            focusedContentColor = MaterialTheme.colorScheme.onSurface
+        ),
         shape = ButtonDefaults.shape(shape = RoundedCornerShape(40.dp)),
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
     ) {
