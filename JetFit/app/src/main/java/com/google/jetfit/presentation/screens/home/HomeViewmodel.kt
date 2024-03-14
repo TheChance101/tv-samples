@@ -8,6 +8,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewmodel @Inject constructor(
     jetFitRepository: JetFitRepository
-) : ViewModel(){
+):ViewModel() {
 
 }
