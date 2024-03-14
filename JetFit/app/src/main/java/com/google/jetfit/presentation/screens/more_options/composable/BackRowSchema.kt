@@ -35,7 +35,11 @@ internal fun BackRowSchema(
         IconButton(
             modifier = Modifier.size(20.dp),
             colors = ButtonDefaults.colors(containerColor = MaterialTheme.colorScheme.onSurfaceVariant),
-            onClick = onClickBack
+            onClick = onClickBack,
+            scale = ButtonDefaults.scale(
+                scale = 1f,
+                focusedScale = 1.2f,
+            )
         ) {
             Icon(
                 modifier = Modifier.size(12.dp),
