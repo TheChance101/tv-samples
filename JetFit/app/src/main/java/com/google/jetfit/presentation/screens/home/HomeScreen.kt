@@ -27,6 +27,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.tv.material3.*
 import androidx.tv.material3.Icon
 import androidx.tv.material3.ModalNavigationDrawer
@@ -40,10 +41,10 @@ fun HomeScreen() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(Color.Red),
+                .background(MaterialTheme.colorScheme.background),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Home Screen")
+        Text("Home Screen", fontSize = 24.sp)
     }
 }

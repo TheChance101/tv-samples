@@ -45,7 +45,9 @@ fun JetFitTheme(
         onSurface = onSurface,
         surfaceVariant = surfaceVariant,
         onSurfaceVariant = onSurfaceVariant,
-        border = outline
+        border = outline,
+        inverseOnSurface = inverseOnSurface,
+            inverseSurface = inverseSurface
     ) else darkColorScheme()
 
     CompositionLocalProvider(

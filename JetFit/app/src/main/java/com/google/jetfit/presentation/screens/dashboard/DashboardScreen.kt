@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.favorite.FavoriteScreen
-import com.google.jetfit.presentation.screens.fitnessCenter.FitnessCenterScreen
+import com.google.jetfit.presentation.screens.training.TrainingScreen
 import com.google.jetfit.presentation.screens.home.HomeScreen
 import com.google.jetfit.presentation.screens.search.SearchScreen
 import com.google.jetfit.presentation.screens.settings.SettingsScreen
@@ -36,21 +36,21 @@ fun DashboardScreen(
         ) {
             NavHost(
                     navController = navController,
-                    startDestination = Screens.Home.route,
+                    startDestination = Screens.Home(),
             ) {
-                composable(Screens.Search.route) {
+                composable(Screens.Search()) {
                     SearchScreen()
                 }
-                composable(Screens.Home.route) {
+                composable(Screens.Home()) {
                     HomeScreen()
                 }
-                composable(Screens.FitnessCenter.route) {
-                    FitnessCenterScreen()
+                composable(Screens.Training()) {
+                    TrainingScreen()
                 }
-                composable(Screens.Favorite.route) {
+                composable(Screens.Favorite()) {
                     FavoriteScreen()
                 }
-                composable(Screens.Settings.route) {
+                composable(Screens.Settings()) {
                     SettingsScreen()
                 }
             }

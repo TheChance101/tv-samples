@@ -23,7 +23,7 @@ fun App(
     NavHost(
         navController = navController,
         route = "root_host",
-        startDestination = Screens.Dashboard.route,
+        startDestination = Screens.Dashboard(),
         builder = {
             navigationDrawerGraph(
                     onNavigateToRoot = navController::navigateTo,

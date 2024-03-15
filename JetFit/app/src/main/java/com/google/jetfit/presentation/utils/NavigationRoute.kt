@@ -12,7 +12,7 @@ import com.google.jetfit.presentation.screens.dashboard.DashboardScreen
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 fun NavGraphBuilder.navigationDrawerGraph(onNavigateToRoot: (Screens) -> Unit, onBackPressed: () -> Unit) {
-    composable(route = Screens.Dashboard.route) {
+    composable(route = Screens.Dashboard()) {
 
         val navController = rememberNavController()
         val navBackStackEntry by navController.currentBackStackEntryAsState()
