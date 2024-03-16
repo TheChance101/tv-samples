@@ -1,9 +1,24 @@
 package com.google.jetfit.presentation.screens
 
+import com.google.jetfit.R
+
 enum class Screens(
     private val args: List<String>? = null,
+    var routePath: String? = null,
+    var clearBackStack: Boolean = false,
+    val isNavigationDrawerItem: Boolean = false,
+    val navigationDrawerIcon: Int? = null
 ) {
-    Home, VideoPlayer,AudioPlayer;
+    Home,
+    VideoPlayer,
+    AudioPlayer,
+    Dashboard;
+
+    Search( isNavigationDrawerItem =true, navigationDrawerIcon = R.drawable.search_),
+    Home( isNavigationDrawerItem = true, navigationDrawerIcon = R.drawable.home),
+    Training( isNavigationDrawerItem = true, navigationDrawerIcon = R.drawable.fitness_center),
+    Favorite( isNavigationDrawerItem = true, navigationDrawerIcon = R.drawable.favorite),
+    Settings(isNavigationDrawerItem = true, navigationDrawerIcon = R.drawable.settings);
 
     operator fun invoke(): String {
         val argList = StringBuilder()
