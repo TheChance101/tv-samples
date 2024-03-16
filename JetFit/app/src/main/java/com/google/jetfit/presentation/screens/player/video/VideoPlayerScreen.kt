@@ -62,6 +62,7 @@ fun VideoPlayerScreen(
     VideoPlayerContent(state = state.workoutUiState, onBackPressed = onBackPressed)
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
 private fun VideoPlayerContent(

@@ -23,6 +23,10 @@ class JetFitImpl @Inject constructor() : JetFitRepository {
         )
     }
 
+    override fun getWorkoutById() {
+        TODO("Not yet implemented")
+    }
+
     override fun getSongById(id: String): Song {
         return Song(
             id = "123456sdasdsa",
