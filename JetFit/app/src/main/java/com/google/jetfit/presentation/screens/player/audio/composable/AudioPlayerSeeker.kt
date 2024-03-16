@@ -19,17 +19,17 @@ fun AudioPlayerSeeker(
 ) {
     val textProgress = contentProgress.toComponents { h, m, s, _ ->
         if (h > 0) {
-            "$h:${m.padStartWith0()}:${s.padStartWith0()}"
+            "$h:${m}:${s.padStartWith0()}"
         } else {
-            "${m.padStartWith0()}:${s.padStartWith0()}"
+            "${m}:${s.padStartWith0()}"
         }
 
     }
     val textDuration = contentDuration.toComponents { h, m, s, _ ->
         if (h > 0) {
-            "$h:${m.padStartWith0()}:${s.padStartWith0()}"
+            "$h:${m}:${s.padStartWith0()}"
         } else {
-            "${m.padStartWith0()}:${s.padStartWith0()}"
+            "${m}:${s.padStartWith0()}"
         }
     }
 

@@ -1,11 +1,17 @@
 package com.google.jetfit.presentation.screens.player.audio
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -91,12 +98,21 @@ private fun AudioPlayerContent(
             isPlaying = exoPlayer.isPlaying
         }
     }
-
+    val infiniteTransition = rememberInfiniteTransition(label = "")
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 0.8f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1500),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = ""
+    )
     Column(
         modifier = Modifier
             .dPadAudioEvents(exoPlayer = exoPlayer)
-            .fillMaxHeight()
-            .fillMaxWidth(0.6f)
+            .focusable()
+            .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -104,10 +120,11 @@ private fun AudioPlayerContent(
         AsyncImage(
             modifier = Modifier
                 .size(196.dp)
+                .scale(scale)
                 .clip(RoundedCornerShape(16.dp)),
             model = state.imageUrl,
             contentDescription = stringResource(R.string.song_image),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
 
         PlayerTitle(
@@ -120,7 +137,9 @@ private fun AudioPlayerContent(
         )
 
         AudioPlayerSeeker(
-            modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            modifier = Modifier
+                .fillMaxWidth(0.6f)
+                .align(alignment = Alignment.CenterHorizontally),
             onSeek = { exoPlayer.seekTo(exoPlayer.duration.times(it).toLong()) },
             contentProgress = contentCurrentPosition.milliseconds,
             contentDuration = exoPlayer.duration.milliseconds
@@ -155,7 +174,7 @@ private fun AudioPlayerControls(
         }
         AudioPlayerControlsIcon(
             icon = if (!isPlaying) R.drawable.play_icon else R.drawable.pause,
-            buttonColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            buttonColor = MaterialTheme.colorScheme.onBackground,
             size = 56.dp
         ) {
             if (isPlaying) {
