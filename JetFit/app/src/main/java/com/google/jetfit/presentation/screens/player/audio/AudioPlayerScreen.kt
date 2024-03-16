@@ -14,13 +14,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.jetfit.presentation.theme.JetFitTheme
 
 @Composable
-fun AudioPlayerScreen(viewModel: AudioPlayerViewModel = hiltViewModel()) {
+fun AudioPlayerScreen(
+    viewModel: AudioPlayerViewModel = hiltViewModel(),
+    onBackPressed: () -> Unit,
+) {
     val state by viewModel.state.collectAsState()
-    AudioPlayerContent()
+    AudioPlayerContent(state = state.songUiState, onBackPressed = onBackPressed)
 }
 
 @Composable
-private fun AudioPlayerContent() {
+private fun AudioPlayerContent(
+    state: SongUiState,
+    onBackPressed: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -35,6 +41,6 @@ private fun AudioPlayerContent() {
 @Composable
 fun PreviewVideoPlayerScreen() {
     JetFitTheme {
-        AudioPlayerContent()
+        AudioPlayerContent(SongUiState()) {}
     }
 }

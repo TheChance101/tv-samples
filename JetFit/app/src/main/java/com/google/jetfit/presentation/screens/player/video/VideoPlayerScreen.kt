@@ -52,8 +52,8 @@ import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun VideoPlayerScreen(
+    viewModel: VideoPlayerViewModel = hiltViewModel(),
     onBackPressed: () -> Unit,
-    viewModel: VideoPlayerViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     VideoPlayerContent(state = state.workoutUiState, onBackPressed = onBackPressed)
