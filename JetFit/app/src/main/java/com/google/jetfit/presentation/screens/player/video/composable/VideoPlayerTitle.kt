@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.video_player.composable
+package com.google.jetfit.presentation.screens.player.video.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

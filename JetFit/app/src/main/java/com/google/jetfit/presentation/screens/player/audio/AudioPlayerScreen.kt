@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.audio_player
+package com.google.jetfit.presentation.screens.player.audio
 
 import androidx.compose.runtime.Composable
 

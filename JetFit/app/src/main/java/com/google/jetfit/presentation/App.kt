@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.jetfit.presentation.screens.Screens
-import com.google.jetfit.presentation.screens.video_player.VideoPlayerScreen
+import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
 
 @Composable
 fun App(

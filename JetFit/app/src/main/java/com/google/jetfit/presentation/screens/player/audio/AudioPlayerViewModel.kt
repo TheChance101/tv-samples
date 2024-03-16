@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.audio_player
+package com.google.jetfit.presentation.screens.player.audio
 
 import androidx.lifecycle.ViewModel
 import com.google.jetfit.data.repositories.JetFitRepository

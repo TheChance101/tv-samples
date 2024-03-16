@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.jetfit.presentation.screens.video_player.composable
+package com.google.jetfit.presentation.screens.player.video.composable
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable

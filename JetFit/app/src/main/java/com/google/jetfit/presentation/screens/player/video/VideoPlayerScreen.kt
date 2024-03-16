@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.video_player
+package com.google.jetfit.presentation.screens.player.video
 
 import android.net.Uri
 import androidx.activity.compose.BackHandler
@@ -38,13 +38,13 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomFillButton
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerControlsIcon
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerFrame
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerOverlay
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerSeeker
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerState
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerTitle
-import com.google.jetfit.presentation.screens.video_player.composable.rememberVideoPlayerState
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerControlsIcon
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerFrame
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerOverlay
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerSeeker
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerState
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerTitle
+import com.google.jetfit.presentation.screens.player.video.composable.rememberVideoPlayerState
 import com.google.jetfit.presentation.theme.JetFitTheme
 import com.google.jetfit.presentation.utils.dPadEvents
 import kotlinx.coroutines.delay

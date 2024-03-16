@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.media3.exoplayer.ExoPlayer
-import com.google.jetfit.presentation.screens.video_player.composable.VideoPlayerState
+import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerState
 
 private val DPadEventsKeyCodes = listOf(
     KeyEvent.KEYCODE_DPAD_LEFT,

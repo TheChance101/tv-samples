@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.video_player
+package com.google.jetfit.presentation.screens.player.video
 
 import javax.annotation.concurrent.Immutable
 

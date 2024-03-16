@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.video_player
+package com.google.jetfit.presentation.screens.player.video
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
