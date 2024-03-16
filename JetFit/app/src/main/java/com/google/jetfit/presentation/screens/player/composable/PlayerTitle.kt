@@ -1,10 +1,11 @@
-package com.google.jetfit.presentation.screens.player.video.composable
+package com.google.jetfit.presentation.screens.player.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -15,22 +16,24 @@ import com.google.jetfit.presentation.theme.JetFitTheme
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun VideoPlayerTitle(
+fun PlayerTitle(
     title: String,
     secondaryText: String,
     modifier: Modifier = Modifier,
+    titleStyle: TextStyle = MaterialTheme.typography.headlineSmall,
+    secondaryTextStyle: TextStyle = MaterialTheme.typography.labelLarge,
 ) {
     Column(modifier.fillMaxWidth()) {
         Text(
             title,
-            style = MaterialTheme.typography.headlineSmall,
+            style = titleStyle,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
         Text(
             text = secondaryText,
-            style = MaterialTheme.typography.labelLarge,
+            style = secondaryTextStyle,
             color = MaterialTheme.colorScheme.onSurface.copy(0.60f),
         )
     }
@@ -39,8 +42,8 @@ fun VideoPlayerTitle(
 
 @Preview(device = Devices.TV_1080p)
 @Composable
-fun PreviewVideoPlayerTitle() {
+fun PreviewPlayerTitle() {
     JetFitTheme {
-        VideoPlayerTitle(title = "Battle ropes HIIT", secondaryText = "Hugo Wright")
+        PlayerTitle(title = "Battle ropes HIIT", secondaryText = "Hugo Wright")
     }
 }
