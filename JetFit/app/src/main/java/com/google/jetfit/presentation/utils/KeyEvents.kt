@@ -98,7 +98,7 @@ fun Modifier.handleDPadKeyEvents(
 
 
 @Stable
-fun Modifier.dPadEvents(
+fun Modifier.dPadVideoEvents(
     exoPlayer: ExoPlayer,
     videoPlayerState: VideoPlayerState,
 ): Modifier = this.handleDPadKeyEvents(
@@ -117,5 +117,15 @@ fun Modifier.dPadEvents(
     onEnter = {
         exoPlayer.pause()
         videoPlayerState.showControls()
+    }
+)
+
+
+@Stable
+fun Modifier.dPadAudioEvents(
+    exoPlayer: ExoPlayer,
+): Modifier = this.handleDPadKeyEvents(
+    onEnter = {
+        exoPlayer.pause()
     }
 )

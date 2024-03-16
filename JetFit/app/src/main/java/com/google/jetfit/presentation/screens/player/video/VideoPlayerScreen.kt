@@ -47,7 +47,7 @@ import com.google.jetfit.presentation.screens.player.video.composable.VideoPlaye
 import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerState
 import com.google.jetfit.presentation.screens.player.video.composable.rememberVideoPlayerState
 import com.google.jetfit.presentation.theme.JetFitTheme
-import com.google.jetfit.presentation.utils.dPadEvents
+import com.google.jetfit.presentation.utils.dPadVideoEvents
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -116,7 +116,7 @@ private fun VideoPlayerContent(
 
     Box(
         Modifier
-            .dPadEvents(
+            .dPadVideoEvents(
                 exoPlayer,
                 videoPlayerState,
             )

@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.ButtonBorder
@@ -25,10 +26,11 @@ fun PlayerControlsIcon(
     border: ButtonBorder,
     buttonColor: Color,
     modifier: Modifier = Modifier,
+    size: Dp = 40.dp,
     onClick: () -> Unit
 ) {
     CustomFillIconButton(
-        modifier = modifier.size(40.dp),
+        modifier = modifier.size(size),
         onClick = onClick,
         icon = icon,
         buttonColor = buttonColor,
