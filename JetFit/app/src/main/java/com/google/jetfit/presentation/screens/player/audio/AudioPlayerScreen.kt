@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,11 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import coil.compose.AsyncImage
 import com.google.jetfit.R
+import com.google.jetfit.presentation.screens.player.audio.composable.AudioPlayerControlsIcon
 import com.google.jetfit.presentation.screens.player.composable.PlayerTitle
 import com.google.jetfit.presentation.theme.JetFitTheme
 import kotlinx.coroutines.delay
@@ -45,6 +48,7 @@ fun AudioPlayerScreen(
     AudioPlayerContent(state = state.songUiState, onBackPressed = onBackPressed)
 }
 
+@androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 private fun AudioPlayerContent(
@@ -56,10 +60,12 @@ private fun AudioPlayerContent(
     val context = LocalContext.current
     val exoPlayer = remember {
         ExoPlayer.Builder(context)
+            .setSeekBackIncrementMs(10)
+            .setSeekForwardIncrementMs(10)
             .build()
             .apply {
                 playWhenReady = true
-                repeatMode = Player.REPEAT_MODE_ONE
+                repeatMode = Player.REPEAT_MODE_OFF
             }
     }
 
@@ -107,13 +113,47 @@ private fun AudioPlayerContent(
             descriptionTextStyle = MaterialTheme.typography.bodyMedium,
         )
 
-        AudioPlayerControls()
+        AudioPlayerControls(exoPlayer = exoPlayer, isPlaying = isPlaying)
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
+@androidx.annotation.OptIn(UnstableApi::class)
 @Composable
-private fun AudioPlayerControls() {
+private fun AudioPlayerControls(
+    exoPlayer: ExoPlayer,
+    isPlaying: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        AudioPlayerControlsIcon(icon = R.drawable.shuffle) {
 
+        }
+        AudioPlayerControlsIcon(icon = R.drawable.forrward_back) {
+            exoPlayer.seekBack()
+        }
+        AudioPlayerControlsIcon(
+            icon = if (!isPlaying) R.drawable.play_icon else R.drawable.pause,
+            buttonColor = MaterialTheme.colorScheme.surface,
+            size = 56.dp
+        ) {
+            if (isPlaying) {
+                exoPlayer.play()
+            } else {
+                exoPlayer.pause()
+            }
+        }
+        AudioPlayerControlsIcon(icon = R.drawable.forrward) {
+            exoPlayer.seekForward()
+        }
+        AudioPlayerControlsIcon(icon = R.drawable.repeat) {
+            exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
+        }
+    }
 }
 
 

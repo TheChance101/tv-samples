@@ -16,6 +16,7 @@ import androidx.tv.material3.IconButtonDefaults
 import androidx.tv.material3.MaterialTheme
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomFillIconButton
+import com.google.jetfit.presentation.theme.JetFitTheme
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
@@ -40,15 +41,17 @@ fun PlayerControlsIcon(
 @Preview(device = Devices.TV_1080p)
 @Composable
 fun PreviewPlayerControlsIcon() {
-    PlayerControlsIcon(
-        modifier = Modifier.size(40.dp),
-        icon = R.drawable.play_icon,
-        border = IconButtonDefaults.border(
-            border = Border(
-                border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.border),
-                shape = CircleShape
-            )
-        ),
-        buttonColor = Color.Transparent
-    ) {}
+    JetFitTheme {
+        PlayerControlsIcon(
+            modifier = Modifier.size(40.dp),
+            icon = R.drawable.play_icon,
+            border = IconButtonDefaults.border(
+                border = Border(
+                    border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.border),
+                    shape = CircleShape
+                )
+            ),
+            buttonColor = Color.Transparent
+        ) {}
+    }
 }

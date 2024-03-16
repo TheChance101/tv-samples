@@ -76,7 +76,7 @@ private fun VideoPlayerContent(
             .build()
             .apply {
                 playWhenReady = true
-                repeatMode = Player.REPEAT_MODE_ONE
+                repeatMode = Player.REPEAT_MODE_OFF
             }
     }
 
