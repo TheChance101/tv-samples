@@ -5,7 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -35,9 +36,12 @@ import androidx.tv.material3.MaterialTheme
 import coil.compose.AsyncImage
 import com.google.jetfit.R
 import com.google.jetfit.presentation.screens.player.audio.composable.AudioPlayerControlsIcon
+import com.google.jetfit.presentation.screens.player.audio.composable.AudioPlayerSeeker
 import com.google.jetfit.presentation.screens.player.composable.PlayerTitle
 import com.google.jetfit.presentation.theme.JetFitTheme
+import com.google.jetfit.presentation.utils.dPadAudioEvents
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun AudioPlayerScreen(
@@ -90,9 +94,11 @@ private fun AudioPlayerContent(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .dPadAudioEvents(exoPlayer = exoPlayer)
+            .fillMaxHeight()
+            .fillMaxWidth(0.6f)
             .background(color = MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
@@ -113,7 +119,18 @@ private fun AudioPlayerContent(
             descriptionTextStyle = MaterialTheme.typography.bodyMedium,
         )
 
-        AudioPlayerControls(exoPlayer = exoPlayer, isPlaying = isPlaying)
+        AudioPlayerSeeker(
+            modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            onSeek = { exoPlayer.seekTo(exoPlayer.duration.times(it).toLong()) },
+            contentProgress = contentCurrentPosition.milliseconds,
+            contentDuration = exoPlayer.duration.milliseconds
+        )
+
+        AudioPlayerControls(
+            modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            exoPlayer = exoPlayer,
+            isPlaying = isPlaying,
+        )
     }
 }
 
@@ -138,7 +155,7 @@ private fun AudioPlayerControls(
         }
         AudioPlayerControlsIcon(
             icon = if (!isPlaying) R.drawable.play_icon else R.drawable.pause,
-            buttonColor = MaterialTheme.colorScheme.surface,
+            buttonColor = MaterialTheme.colorScheme.onSurfaceVariant,
             size = 56.dp
         ) {
             if (isPlaying) {

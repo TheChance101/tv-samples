@@ -2,6 +2,7 @@ package com.google.jetfit.presentation.screens.player.video
 
 import android.net.Uri
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,7 @@ import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.PlayerView
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.Text
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomFillButton
 import com.google.jetfit.presentation.screens.player.composable.PlayerTitle
@@ -66,6 +68,8 @@ private fun VideoPlayerContent(
     state: WorkoutUiState,
     onBackPressed: () -> Unit
 ) {
+    BackHandler(onBack = onBackPressed)
+
     val context = LocalContext.current
     val videoPlayerState = rememberVideoPlayerState(hideSeconds = 4)
 
@@ -106,13 +110,11 @@ private fun VideoPlayerContent(
     var isPlaying: Boolean by remember { mutableStateOf(exoPlayer.isPlaying) }
     LaunchedEffect(Unit) {
         while (true) {
-            delay(300)
+            delay(1000)
             contentCurrentPosition = exoPlayer.currentPosition
             isPlaying = exoPlayer.isPlaying
         }
     }
-
-    BackHandler(onBack = onBackPressed)
 
     Box(
         Modifier
@@ -130,14 +132,6 @@ private fun VideoPlayerContent(
             onRelease = { exoPlayer.release() }
         )
 
-        val onPlayPauseToggle = { shouldPlay: Boolean ->
-            if (shouldPlay) {
-                exoPlayer.play()
-            } else {
-                exoPlayer.pause()
-            }
-        }
-
         val focusRequester = remember { FocusRequester() }
 
         VideoPlayerOverlay(
@@ -149,12 +143,22 @@ private fun VideoPlayerContent(
                 VideoPlayerControlsIcon(
                     modifier = Modifier.focusRequester(focusRequester),
                     icon = if (!isPlaying) R.drawable.play_icon else R.drawable.pause,
-                    onClick = { onPlayPauseToggle(!isPlaying) },
+                    onClick = {
+                        if (isPlaying) {
+                            exoPlayer.play()
+                        } else {
+                            exoPlayer.pause()
+                        }
+                    },
                     state = videoPlayerState,
                     isPlaying = isPlaying,
                 )
             },
-            subtitles = { },
+            subtitles = {
+                AnimatedVisibility(visible = state.subtitles != null) {
+                    Text(text = state.subtitles.toString())
+                }
+            },
             controls = {
                 VideoPlayerControls(
                     isPlaying = isPlaying,
