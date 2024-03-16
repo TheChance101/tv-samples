@@ -100,12 +100,20 @@ private fun AudioPlayerContent(
 
         PlayerTitle(
             modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+            descriptionModifier = Modifier.align(alignment = Alignment.CenterHorizontally),
             title = state.title,
-            secondaryText = "${state.author} • ${state.date}",
+            description = "${state.author} • ${state.date}",
             titleStyle = MaterialTheme.typography.headlineMedium,
-            secondaryTextStyle = MaterialTheme.typography.bodyMedium,
+            descriptionTextStyle = MaterialTheme.typography.bodyMedium,
         )
+
+        AudioPlayerControls()
     }
+}
+
+@Composable
+private fun AudioPlayerControls() {
+
 }
 
 

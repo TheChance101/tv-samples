@@ -1,11 +1,11 @@
 package com.google.jetfit.presentation.screens.player.composable
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -18,12 +18,13 @@ import com.google.jetfit.presentation.theme.JetFitTheme
 @Composable
 fun PlayerTitle(
     title: String,
-    secondaryText: String,
+    description: String,
     modifier: Modifier = Modifier,
+    descriptionModifier: Modifier = Modifier,
     titleStyle: TextStyle = MaterialTheme.typography.headlineSmall,
-    secondaryTextStyle: TextStyle = MaterialTheme.typography.labelLarge,
+    descriptionTextStyle: TextStyle = MaterialTheme.typography.labelLarge,
 ) {
-    Column(modifier.fillMaxWidth()) {
+    Column(modifier) {
         Text(
             title,
             style = titleStyle,
@@ -32,9 +33,11 @@ fun PlayerTitle(
         )
 
         Text(
-            text = secondaryText,
-            style = secondaryTextStyle,
+            modifier = descriptionModifier,
+            text = description,
+            style = descriptionTextStyle,
             color = MaterialTheme.colorScheme.onSurface.copy(0.60f),
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -44,6 +47,6 @@ fun PlayerTitle(
 @Composable
 fun PreviewPlayerTitle() {
     JetFitTheme {
-        PlayerTitle(title = "Battle ropes HIIT", secondaryText = "Hugo Wright")
+        PlayerTitle(title = "Battle ropes HIIT", description = "Hugo Wright")
     }
 }

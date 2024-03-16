@@ -19,7 +19,7 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.IconButtonDefaults
 import androidx.tv.material3.MaterialTheme
 import com.google.jetfit.R
-import com.google.jetfit.components.CustomFillIconButton
+import com.google.jetfit.presentation.screens.player.composable.PlayerControlsIcon
 import com.google.jetfit.presentation.theme.JetFitTheme
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -40,17 +40,17 @@ internal fun VideoPlayerControlsIcon(
         }
     }
 
-    CustomFillIconButton(
+    PlayerControlsIcon(
         modifier = modifier.size(40.dp),
-        onClick = onClick,
         icon = icon,
-        buttonColor = Color.Transparent,
         border = IconButtonDefaults.border(
             border = Border(
                 border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.border),
                 shape = CircleShape
             )
-        )
+        ),
+        buttonColor = Color.Transparent,
+        onClick = onClick
     )
 }
 

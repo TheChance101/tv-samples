@@ -6,6 +6,7 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,12 +39,12 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomFillButton
+import com.google.jetfit.presentation.screens.player.composable.PlayerTitle
 import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerControlsIcon
 import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerFrame
 import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerOverlay
 import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerSeeker
 import com.google.jetfit.presentation.screens.player.video.composable.VideoPlayerState
-import com.google.jetfit.presentation.screens.player.composable.PlayerTitle
 import com.google.jetfit.presentation.screens.player.video.composable.rememberVideoPlayerState
 import com.google.jetfit.presentation.theme.JetFitTheme
 import com.google.jetfit.presentation.utils.dPadEvents
@@ -183,7 +184,8 @@ fun VideoPlayerControls(
         videoTitle = {
             PlayerTitle(
                 title = title,
-                secondaryText = instructor,
+                description = instructor,
+                modifier = Modifier.fillMaxWidth()
             )
         },
         videoActions = {
