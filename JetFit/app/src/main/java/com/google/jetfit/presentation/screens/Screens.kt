@@ -3,7 +3,7 @@ package com.google.jetfit.presentation.screens
 enum class Screens(
     private val args: List<String>? = null,
 ) {
-    Home, VideoPlayer;
+    Home, VideoPlayer,AudioPlayer;
 
     operator fun invoke(): String {
         val argList = StringBuilder()
