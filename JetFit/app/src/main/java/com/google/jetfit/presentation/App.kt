@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
+import com.google.jetfit.presentation.screens.subscription.SubscriptionScreen
 import com.google.jetfit.presentation.utils.navigateTo
 import com.google.jetfit.presentation.utils.navigationDrawerGraph
 
@@ -58,6 +59,17 @@ fun App(
                 )
             ) {
                 AudioPlayerScreen(onBackPressed = onBackPressed)
+            }
+
+            composable(
+                route = Screens.Subscription(),
+                arguments = listOf(
+                    navArgument("") {
+                        type = NavType.StringType
+                    }
+                )
+            ) {
+                SubscriptionScreen(onBackPressed = onBackPressed)
             }
         }
     )
