@@ -1,5 +1,9 @@
 package com.google.jetfit.data.repositories
 
+import com.google.jetfit.data.entities.FavList
+import com.google.jetfit.data.entities.FavWorkout
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import com.google.jetfit.data.entities.Category
 import com.google.jetfit.data.entities.Session
 import com.google.jetfit.data.entities.Training
@@ -7,7 +11,11 @@ import com.google.jetfit.data.entities.Song
 import com.google.jetfit.data.entities.Workout
 import javax.inject.Inject
 
+
 class JetFitImpl @Inject constructor() : JetFitRepository {
+
+    private val dummyWorkoutData:DummyWorkoutData = DummyWorkoutData()
+
     override fun getWorkouts() {
         TODO("Not yet implemented")
     }
@@ -25,6 +33,10 @@ class JetFitImpl @Inject constructor() : JetFitRepository {
 
     override fun getWorkoutById() {
         TODO("Not yet implemented")
+    }
+
+    override fun getFavoritesWorkouts() =  flow {
+        emit(FavList(value = dummyWorkoutData.list))
     }
 
     override fun getSongById(id: String): Song {

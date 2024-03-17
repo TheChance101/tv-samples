@@ -7,6 +7,9 @@ import com.google.jetfit.data.entities.Category
 import com.google.jetfit.data.entities.Session
 import com.google.jetfit.data.entities.Training
 
+import com.google.jetfit.data.entities.FavList
+import kotlinx.coroutines.flow.Flow
+
 interface JetFitRepository {
     fun getWorkouts()
     fun getWorkoutById(id: String): Workout
@@ -15,5 +18,7 @@ interface JetFitRepository {
     suspend fun getSessions(): List<Session>
     suspend fun getCategories(): List<Category>
     suspend fun getTrainingsRecommended(): List<Training>
+
+    fun getFavoritesWorkouts(): Flow<FavList>
 
 }
