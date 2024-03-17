@@ -103,4 +103,8 @@ dependencies {
     // JSON parser
     implementation(libs.kotlinx.serialization)
 
+    // Media3
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+
 }
