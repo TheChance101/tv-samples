@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.jetfit.presentation.screens.Screens
+import com.google.jetfit.presentation.screens.more_options.MoreOptionsScreen
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
 import com.google.jetfit.presentation.utils.navigateTo
@@ -58,6 +59,17 @@ fun App(
                 )
             ) {
                 AudioPlayerScreen(onBackPressed = onBackPressed)
+            }
+
+            composable(
+                route = Screens.MoreOptions(),
+                arguments = listOf(
+                    navArgument(""){
+                        type = NavType.StringType
+                    }
+                )
+            ){
+                MoreOptionsScreen(onBackPressed = onBackPressed)
             }
         }
     )
