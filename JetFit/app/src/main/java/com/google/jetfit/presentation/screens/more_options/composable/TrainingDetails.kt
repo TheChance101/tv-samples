@@ -13,7 +13,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
@@ -69,7 +68,7 @@ private fun TrainingDetailsPreview() {
         TrainingDetails(
             title = "Total-body balance pilates",
             time = "34 Min  |  Intensity ••••",
-            description = stringResource(id = R.string.training_desc)
+           // description = stringResource(id = R.string.training_desc)
         )
     }
 }

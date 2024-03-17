@@ -4,7 +4,10 @@ import com.google.jetfit.data.entities.Category
 import com.google.jetfit.data.entities.Session
 import com.google.jetfit.data.entities.Training
 import com.google.jetfit.data.entities.Song
+import com.google.jetfit.data.entities.Subscription
 import com.google.jetfit.data.entities.Workout
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class JetFitImpl @Inject constructor() : JetFitRepository {
@@ -154,5 +157,30 @@ class JetFitImpl @Inject constructor() : JetFitRepository {
                 imageUrl = "https://s3-alpha-sig.figma.com/img/e8c5/e762/261fdaee84066db90f2dcdea8f4b6272?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XpTP2A-yxY8hT91ub7tcc8KAhL7YQUAJnkFCbjU4K8Y3eLt4yqaZzbRmJEtOXKnr0LMWlRPxWafCsLpj79Bgx2lkzI9wl3tKpXI0prvUbl~SwdF5wDR-11A~abdY1ugr4AychRuiweXENGU~fGOvT6HERw2XEE5BD4BafAafDC3J0tNNxoVnG9p612zqMtJKdZpJLOci4O6KOjG51BGA9-Zzat32UtUWGyccUnGkWrPtEoUarnCcNjlJ6mFNYyAWB5GvqDLRF7~ngjVrUj48cF9JFB0OTlys3YGLtxqDsXgFyCeBt9BX8d8x0VVfhsXSd4sjl93FVa70hss9lOxHzA__",
             )
         )
+    }
+
+    override fun getSubscriptionOptionsByInstructorId(instructorId: String): Flow<List<Subscription>> {
+        return flow {
+            emit(
+                listOf(
+                    Subscription(
+                        periodTime = "1",
+                        price = "$7.99",
+                    ),
+                    Subscription(
+                        periodTime = "3",
+                        price = "$19.99",
+                    ),
+                    Subscription(
+                        periodTime = "12",
+                        price = "$79.99",
+                    ),
+                )
+            )
+        }
+    }
+
+    override suspend fun getInstructorImageById(instructorId: String): String {
+        return "https://s3-alpha-sig.figma.com/img/4a55/976b/4326c161fb1a8e1619b6b935a7d72898?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FrisEgVcxRsPdV5~7TFJuogCRC1DGQncvd7W3eEWrE3raW3WU-NFGMg9-G3rrUAanAM8doc5Ce842G-vEyVzC~eQyY8Sl2X9RJW199oajHOcVq4QBhjWmJBbSiQiJjEm5sqGgyPSUvpWd2D-5b1d7GeSFvRPAnmR-nfnHTlmtGkc3c1y4awXIyWPvzRAxqEwJN~3lsPxAOA~4c7YM5h9tJbM7GbBru~NOdU1cP5tRF52~~H0xgebbcOU1hst5UHvDph-7zsViDPCOWvAJrAwKLF8Jzd1Ts-1BiHsVqFVROTu6eA4pj9t7u7omBGcc0XplFfJobo7YG8pFKJSwKPOrQ__"
     }
 }
