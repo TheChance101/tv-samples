@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
+import com.google.jetfit.presentation.screens.profileSelector.ProfileSelectorScreen
 import com.google.jetfit.presentation.utils.navigateTo
 import com.google.jetfit.presentation.utils.navigationDrawerGraph
 
@@ -23,7 +24,7 @@ fun App(
     NavHost(
         navController = navController,
         route = "root_host",
-        startDestination = Screens.Dashboard(),
+        startDestination = Screens.ProfileSelector(),
         builder = {
             navigationDrawerGraph(
                     onNavigateToRoot = navController::navigateTo,
@@ -58,6 +59,11 @@ fun App(
                 )
             ) {
                 AudioPlayerScreen(onBackPressed = onBackPressed)
+            }
+            composable(
+                route = Screens.ProfileSelector()
+            ) {
+                ProfileSelectorScreen()
             }
         }
     )
