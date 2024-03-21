@@ -47,15 +47,16 @@ fun JetFitTheme(
         onSurfaceVariant = onSurfaceVariant,
         border = outline,
         inverseOnSurface = inverseOnSurface,
-            inverseSurface = inverseSurface
+        inverseSurface = inverseSurface,
+        inversePrimary = inversePrimary
     ) else darkColorScheme()
 
     CompositionLocalProvider(
             LocalNavigationProvider provides rememberNavController(),
     ) {
         MaterialTheme(
-                colorScheme = colorScheme,
-                typography = Typography,
+            colorScheme = colorScheme,
+            typography = Typography,
             content = content,
             shapes = Shapes
         )
