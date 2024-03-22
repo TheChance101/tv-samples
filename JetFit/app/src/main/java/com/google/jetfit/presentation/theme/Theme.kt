@@ -2,8 +2,10 @@ package com.google.jetfit.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.darkColorScheme
@@ -20,7 +22,7 @@ fun JetFitTheme(
 ) {
 
 
-    val colorScheme = if (isInDarkTheme) lightColorScheme(
+    val colorScheme = if (isInDarkTheme) darkColorScheme() else lightColorScheme(
         primary = primary,
         onPrimary = onPrimary,
         primaryContainer = primaryContainer,
@@ -45,15 +47,18 @@ fun JetFitTheme(
         onSurfaceVariant = onSurfaceVariant,
         border = outline,
         inverseOnSurface = inverseOnSurface,
-            inverseSurface = inverseSurface
-    ) else darkColorScheme()
+        inverseSurface = inverseSurface,
+        inversePrimary = inversePrimary
+    )
 
-
-    MaterialTheme(
+    CompositionLocalProvider(
+            LocalNavigationProvider provides rememberNavController(),
+    ) {
+        MaterialTheme(
             colorScheme = colorScheme,
             typography = Typography,
             content = content,
             shapes = Shapes
         )
-
+    }
 }
