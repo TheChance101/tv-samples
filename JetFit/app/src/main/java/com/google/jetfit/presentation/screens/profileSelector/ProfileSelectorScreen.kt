@@ -23,8 +23,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.tv.foundation.lazy.list.TvLazyRow
@@ -38,7 +40,9 @@ import com.google.jetfit.R
 import com.google.jetfit.components.CustomOutlineButton
 import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.theme.LocalNavigationProvider
+import com.google.jetfit.presentation.utils.conditional
 import com.google.jetfit.presentation.utils.navigateTo
+import com.google.jetfit.presentation.utils.shadowBox
 
 @Composable
 fun ProfileSelectorScreen(
@@ -133,12 +137,30 @@ private fun ItemProfile(
                 modifier = modifier
                     .padding(horizontal = 16.dp)
                     .padding(bottom = 16.dp)
-                    .size(scaleAvatar)
+                    .conditional(
+                        isItemProfileFocused,
+                        ifTrue = {
+                            shadowBox(
+                                color = Color(0x26000000),
+                                blurRadius = 10.dp,
+                                spreadRadius = 9.dp,
+                                offset = DpOffset(0.dp, 6.dp),
+                                shape = CircleShape,
+                            ).shadowBox(
+                                color = Color(0x4D000000),
+                                blurRadius = 3.dp,
+                                offset = DpOffset(0.dp, 2.dp),
+                                shape = CircleShape,
+                            )
+                        }
+                    )
+                    .padding(1.dp)
                     .border(
                         width = 3.dp,
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = if (isItemProfileFocused) 1f else 0f),
                         shape = CircleShape,
                     )
+                    .size(scaleAvatar)
                     .clip(CircleShape)
                     .onFocusChanged {
                         isItemProfileFocused = it.hasFocus
