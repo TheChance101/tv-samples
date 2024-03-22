@@ -1,5 +1,6 @@
 package com.google.jetfit.presentation.screens.profileSelector
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,19 +36,28 @@ import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomOutlineButton
+import com.google.jetfit.presentation.screens.Screens
+import com.google.jetfit.presentation.theme.LocalNavigationProvider
+import com.google.jetfit.presentation.utils.navigateTo
 
 @Composable
-fun ProfileSelectorScreen() {
+fun ProfileSelectorScreen(
+    onBackPressed: () -> Unit,
+) {
     val viewModel: ProfileSelectorViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
 
     val profileFocusRequester = remember { FocusRequester() }
-
+    val navController = LocalNavigationProvider.current
 
     ProfileSelectorContent(
         state = state,
         profileFocusRequester = profileFocusRequester,
-        interaction = viewModel
+        interaction = viewModel,
+        onClickProfileSelected = {
+            navController.navigateTo(Screens.Dashboard)
+        },
+        onBackPressed = onBackPressed
     )
 }
 
@@ -57,7 +67,10 @@ private fun ProfileSelectorContent(
     state: ProfileSelectorUiState,
     profileFocusRequester: FocusRequester,
     interaction: ProfileSelectorInteraction,
+    onClickProfileSelected: () -> Unit,
+    onBackPressed: () -> Unit,
 ) {
+    BackHandler(onBack = onBackPressed)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -82,7 +95,10 @@ private fun ProfileSelectorContent(
             items(state.profiles) { profile ->
                 ItemProfile(
                     profile,
-                    onClick = interaction::onClickProfile,
+                    onClick = { idProfile ->
+                        onClickProfileSelected()
+                        interaction.onClickProfileSelected(idProfile)
+                    },
                 )
             }
         }

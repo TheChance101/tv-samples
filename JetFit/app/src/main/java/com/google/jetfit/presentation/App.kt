@@ -3,10 +3,10 @@ package com.google.jetfit.presentation
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
@@ -18,9 +18,9 @@ import com.google.jetfit.presentation.utils.navigationDrawerGraph
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
 fun App(
+    navController: NavHostController,
     onBackPressed: () -> Unit
 ) {
-    val navController = rememberNavController()
     NavHost(
         navController = navController,
         route = "root_host",
@@ -63,7 +63,7 @@ fun App(
             composable(
                 route = Screens.ProfileSelector()
             ) {
-                ProfileSelectorScreen()
+                ProfileSelectorScreen(onBackPressed = onBackPressed)
             }
         }
     )

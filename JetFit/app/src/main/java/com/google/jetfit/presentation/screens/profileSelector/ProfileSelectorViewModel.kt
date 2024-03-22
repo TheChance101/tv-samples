@@ -45,7 +45,7 @@ class ProfileSelectorViewModel @Inject constructor(
     )
 
 
-    override fun onClickProfile(id: String) {
+    override fun onClickProfileSelected(id: String) {
         //TODO("Not yet implemented")
     }
 

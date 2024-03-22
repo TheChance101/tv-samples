@@ -2,10 +2,8 @@ package com.google.jetfit.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.darkColorScheme
@@ -50,14 +48,12 @@ fun JetFitTheme(
             inverseSurface = inverseSurface
     ) else darkColorScheme()
 
-    CompositionLocalProvider(
-            LocalNavigationProvider provides rememberNavController(),
-    ) {
-        MaterialTheme(
-                colorScheme = colorScheme,
-                typography = Typography,
+
+    MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
             content = content,
             shapes = Shapes
         )
-    }
+
 }
