@@ -3,11 +3,9 @@ package com.google.jetfit.presentation.utils
 import android.graphics.BlurMaskFilter
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Canvas
@@ -29,38 +27,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isSpecified
-
-
-@Immutable
-data class Shadow(
-    @Stable val offsetX: Dp = 0.dp,
-    @Stable val offsetY: Dp = 0.dp,
-    @Stable val radius: Dp,
-    @Stable val color: Color,
-)
-
-fun Modifier.withShadow(
-    shadow: Shadow,
-    shape: Shape,
-    showShadow: Boolean = true,
-) = drawBehind {
-    if (showShadow) {
-        drawIntoCanvas { canvas ->
-            val paint = Paint()
-            paint.asFrameworkPaint().apply {
-                this.color = Color.Transparent.toArgb()
-                setShadowLayer(
-                    shadow.radius.toPx(),
-                    shadow.offsetX.toPx(),
-                    shadow.offsetY.toPx(),
-                    shadow.color.toArgb(),
-                )
-            }
-            val outline = shape.createOutline(size, layoutDirection, this)
-            canvas.drawOutline(outline, paint)
-        }
-    }
-}
 
 
 inline fun Modifier.conditional(
