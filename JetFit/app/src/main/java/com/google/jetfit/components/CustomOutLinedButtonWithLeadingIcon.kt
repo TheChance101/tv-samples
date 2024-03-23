@@ -33,7 +33,7 @@ fun CustomOutLinedButtonWithLeadingIcon(
             horizontalArrangement = Arrangement.Center
         ) {
             Icon(
-                modifier = Modifier.padding(start = 4.dp),
+                modifier = Modifier.padding(end = 4.dp),
                 painter = painterResource(id = icon),
                 contentDescription = null
             )
