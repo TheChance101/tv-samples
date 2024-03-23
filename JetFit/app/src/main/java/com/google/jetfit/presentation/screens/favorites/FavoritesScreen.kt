@@ -1,10 +1,10 @@
 package com.google.jetfit.presentation.screens.favorites
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,60 +21,73 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.tv.foundation.lazy.grid.TvGridCells
 import androidx.tv.foundation.lazy.grid.TvLazyHorizontalGrid
 import androidx.tv.foundation.lazy.grid.items
-import androidx.tv.material3.Border
 import androidx.tv.material3.Button
-import androidx.tv.material3.ButtonBorder
-import androidx.tv.material3.ButtonDefaults
-import androidx.tv.material3.Card
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
+import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.OutlinedButton
 import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomCardWithIntensity
-import com.google.jetfit.components.CustomFillIconButton
+import com.google.jetfit.components.CustomOutLinedButtonWithLeadingIcon
+import com.google.jetfit.components.CustomOutlineIconButton
 import com.google.jetfit.data.entities.FavWorkout
 import com.google.jetfit.presentation.theme.onSurface
-import com.google.jetfit.presentation.theme.onSurfaceVariant
 import com.google.jetfit.presentation.theme.surface
 import com.google.jetfit.presentation.theme.surfaceVariant
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun FavoritesScreen(favoritesViewModel: FavoritesViewModel = hiltViewModel()) {
+fun FavoritesScreen(
+    onBackPressed: () -> Unit
+) {
 
+    val favoritesViewModel: FavoritesViewModel = hiltViewModel()
     val uiState by favoritesViewModel.uiState.collectAsStateWithLifecycle()
+
+    val workoutFocusRequester = remember { FocusRequester() }
     val selectedItem by favoritesViewModel.selectedWorkout.collectAsStateWithLifecycle()
 
     when (val value = uiState) {
         is FavoritesScreenUiState.Ready -> {
-            FavoritesAlbum(
+            FavoritesScreenContent(
                 modifier = Modifier,
                 workoutsList = value.favoritesWorkouts,
-                onWorkoutSelect = favoritesViewModel::onWorkoutSelect
+                onWorkoutSelect = favoritesViewModel::onWorkoutSelect,
+                workoutFocusRequester = workoutFocusRequester,
+                interaction = favoritesViewModel,
+                selectedItem = selectedItem,
+                onBackPressed = onBackPressed
             )
         }
+
         is FavoritesScreenUiState.Loading -> {
             Loading(modifier = Modifier.fillMaxSize())
         }
+
         is FavoritesScreenUiState.Error -> {
             Error(modifier = Modifier.fillMaxSize())
         }
@@ -83,22 +97,23 @@ fun FavoritesScreen(favoritesViewModel: FavoritesViewModel = hiltViewModel()) {
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-private fun FavoritesAlbum(
+private fun FavoritesScreenContent(
     modifier: Modifier = Modifier,
     workoutsList: List<FavWorkout>,
-    onWorkoutSelect: (FavWorkout) -> Unit
+    selectedItem: FavWorkout? = null,
+    interaction: FavoritesInteraction,
+    workoutFocusRequester: FocusRequester,
+    onWorkoutSelect: (FavWorkout) -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             text = "Favorites",
             modifier = Modifier.padding(bottom = 8.dp, top = 56.dp, start = 32.dp, end = 32.dp),
             style = TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.LightGray
+                fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color.LightGray
             )
         )
         TvLazyHorizontalGrid(
@@ -108,11 +123,12 @@ private fun FavoritesAlbum(
                 .fillMaxWidth()
                 .padding(vertical = 24.dp)
         ) {
-            items(workoutsList) { item ->
-                CustomCardWithIntensity(
-                    modifier = Modifier
-                        .width(196.dp)
-                        .padding(horizontal = 12.dp),
+            items(
+                items = workoutsList, key = { it.id }
+            ) { item ->
+                CustomCardWithIntensity(modifier = Modifier
+                    .width(196.dp)
+                    .padding(horizontal = 12.dp),
                     imageUrl = item.image,
                     title = item.name,
                     timeText = item.duration,
@@ -122,6 +138,93 @@ private fun FavoritesAlbum(
                         onWorkoutSelect(item)
                     }
                 )
+            }
+        }
+        AnimatedVisibility(
+            visible = selectedItem != null,
+            enter = fadeIn(
+                animationSpec = tween(300)
+            ),
+            exit = fadeOut(
+                animationSpec = tween(300)
+            ),
+            ) {
+            Dialog(onDismissRequest = onBackPressed) {
+                selectedItem?.let { workout ->
+                    Box(
+                        modifier = Modifier
+                            .background(surfaceVariant, RoundedCornerShape(16.dp))
+                            .fillMaxWidth(0.75f)
+                            .fillMaxHeight(0.8f)
+                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                    ) {
+                        AsyncImage(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .alpha(0.88f),
+                            model = workout.image,
+                            contentDescription = null,
+                            contentScale = ContentScale.Inside
+                        )
+                        Column(
+                            modifier = Modifier.fillMaxSize()
+                                .background(surfaceVariant.copy(alpha = 0.35f))
+                                .padding(horizontal = 24.dp),
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Spacer(modifier = Modifier.fillMaxHeight(0.45f))
+                            Text(
+                                text = workout.name,
+                                textAlign = TextAlign.Justify,
+                                style = MaterialTheme.typography.titleMedium,
+                                color = onSurface,
+                                modifier = Modifier.padding(bottom = 8.dp),
+                                overflow = TextOverflow.Ellipsis,
+                            )
+                            Row(
+                                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Start
+                            ) {
+                                Text(
+                                    text = "${workout.duration} | Intensity ",
+                                    modifier = Modifier,
+                                    textAlign = TextAlign.Justify,
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = onSurface,
+                                    overflow = TextOverflow.Ellipsis,
+                                    softWrap = true,
+                                    maxLines = 4
+                                )
+                                repeat(workout.intensity) { Text(text = "•") }
+                            }
+                            Text(
+                                text = workout.description,
+                                modifier = Modifier.padding(bottom = 28.dp),
+                                textAlign = TextAlign.Justify,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = Color.LightGray,
+                                overflow = TextOverflow.Ellipsis,
+                                softWrap = true,
+                                maxLines = 4
+                            )
+                            CustomOutLinedButtonWithLeadingIcon(
+                                text = "Start",
+                                icon = R.drawable.play_icon,
+                                modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp)
+                            ) {
+                                interaction.onStartWorkout(workout.id)
+                            }
+                            CustomOutLinedButtonWithLeadingIcon(
+                                text = "Remove from favorites",
+                                icon = R.drawable.icon_remove,
+                                modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp)
+                            ) {
+                                interaction.onRemoveWorkout(workout.id)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
