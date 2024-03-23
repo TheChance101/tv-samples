@@ -3,6 +3,7 @@ package com.google.jetfit.presentation.screens.subscription.composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -27,7 +28,9 @@ internal fun SubscriptionOption(
     onClick: () -> Unit = {}
 ) {
     Column(
-        modifier = modifier.padding(vertical = 12.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 12.dp),
     ) {
         Text(
             text = title,
@@ -35,7 +38,8 @@ internal fun SubscriptionOption(
             color = MaterialTheme.colorScheme.onSurface
         )
         Row(
-            horizontalArrangement = Arrangement.spacedBy(24.dp)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
                 text = description,

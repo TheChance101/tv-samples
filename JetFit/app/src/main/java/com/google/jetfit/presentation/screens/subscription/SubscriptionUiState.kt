@@ -11,12 +11,12 @@ sealed interface SubscriptionUiState {
         val subscriptionOptions: List<Subscription>
     ) : SubscriptionUiState {
         fun formatPeriodTimeAndPrice(periodTime: String, price: String, context: Context): String {
-            return "${context.getString(R.string.free_trail)} ${price} / ${
+            return "${context.getString(R.string.free_trail)} $price / ${
                 if (periodTime == "1")
-                    context.getString(R.string.month)
+                    "${context.getString(R.string.month)}.\n"
                 else
-                    "$periodTime ${context.getString(R.string.months)}."
-            } \n${context.getString(R.string.subscription_cancelled)}"
+                    "$periodTime \n ${context.getString(R.string.months)}."
+            } ${context.getString(R.string.subscription_cancelled)}"
         }
 
         fun formatPeriodTime(periodTime: String, context: Context): String {

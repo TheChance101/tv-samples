@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +40,7 @@ private fun MoreOptionsContent() {
             TrainingDetails(
                 title = "Total-body balance pilates",
                 time = "34 Min  |  Intensity ••••",
-                description = stringResource(id = R.string.training_desc)
+              //  description = stringResource(id = R.string.training_desc)
             )
             Spacer(modifier = Modifier.height(50.dp))
             BackRowSchema()

@@ -3,6 +3,7 @@ package com.google.jetfit.presentation.screens.subscription.composable
 import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,7 +27,7 @@ internal fun SubscriptionOptions(
 ) {
     val context = LocalContext.current
     Column(
-        modifier = modifier,
+        modifier = modifier.width(412.dp),
     ) {
         Text(
             modifier = Modifier.padding(bottom = 8.dp),
