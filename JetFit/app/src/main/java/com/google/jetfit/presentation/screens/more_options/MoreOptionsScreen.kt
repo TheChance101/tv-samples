@@ -3,11 +3,8 @@ package com.google.jetfit.presentation.screens.more_options
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.jetfit.R
 import com.google.jetfit.data.entities.TrainingE
@@ -47,38 +45,68 @@ private fun MoreOptionsContent(state: MoreOptionsUiState, onBackPressed: () -> U
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
+                ConstraintLayout {
+                    val (
+                        trainingDetails,
+                        backRowSchema,
+                        startButton,
+                        favoritesButton,
+                        moreInfoButton,
+                        viewInstructorButton,
+                        shareButton
+                    ) = createRefs()
+
                     TrainingDetails(
+                        modifier = Modifier.constrainAs(trainingDetails) {},
                         title = state.trainingDetails.title,
                         time = state.formatTimeAndTypeTraining(),
                         description = state.trainingDetails.description
                     )
-                    Spacer(modifier = Modifier.height(50.dp))
-                    BackRowSchema(onClickBack = onBackPressed)
-                }
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+                    BackRowSchema(
+                        modifier = Modifier.constrainAs(backRowSchema) {
+                            top.linkTo(trainingDetails.bottom, margin = 50.dp)
+                        },
+                        onClickBack = onBackPressed
+                    )
+
+
                     MoreOptionsButton(
+                        modifier = Modifier.constrainAs(startButton) {
+                            top.linkTo(trainingDetails.top)
+                            start.linkTo(trainingDetails.end, margin = 164.dp)
+                        },
                         text = stringResource(R.string.start_workout),
                         icon = R.drawable.ic_rounded_play
                     )
                     MoreOptionsButton(
+                        modifier = Modifier.constrainAs(favoritesButton) {
+                            top.linkTo(startButton.bottom, margin = 12.dp)
+                            start.linkTo(startButton.start)
+                        },
                         text = stringResource(R.string.add_to_favorites),
                         icon = R.drawable.ic_outline_favorite
                     )
                     MoreOptionsButton(
+                        modifier = Modifier.constrainAs(moreInfoButton) {
+                            top.linkTo(favoritesButton.bottom, margin = 12.dp)
+                            start.linkTo(startButton.start)
+                        },
                         text = stringResource(R.string.more_info),
                         icon = R.drawable.ic_info
                     )
                     MoreOptionsButton(
+                        modifier = Modifier.constrainAs(viewInstructorButton) {
+                            top.linkTo(moreInfoButton.bottom, margin = 12.dp)
+                            start.linkTo(startButton.start)
+                        },
                         text = stringResource(R.string.view_instructor),
                         icon = R.drawable.ic_instructor
                     )
                     MoreOptionsButton(
+                        modifier = Modifier.constrainAs(shareButton) {
+                            top.linkTo(viewInstructorButton.bottom, margin = 12.dp)
+                            start.linkTo(startButton.start)
+                        },
                         text = stringResource(R.string.share),
                         icon = R.drawable.ic_share
                     )
