@@ -14,7 +14,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.jetfit.presentation.screens.Screens
-import com.google.jetfit.presentation.screens.favorite.FavoriteScreen
 import com.google.jetfit.presentation.screens.favorites.FavoritesScreen
 import com.google.jetfit.presentation.screens.training.TrainingScreen
 import com.google.jetfit.presentation.screens.home.HomeScreen
@@ -49,7 +48,7 @@ fun DashboardScreen(
                     TrainingScreen()
                 }
                 composable(Screens.Favorite()) {
-                    FavoritesScreen()
+                    FavoritesScreen {}
                 }
                 composable(Screens.Settings()) {
                     SettingsScreen()
