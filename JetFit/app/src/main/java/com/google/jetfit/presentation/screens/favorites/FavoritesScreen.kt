@@ -31,6 +31,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -48,7 +49,10 @@ import com.google.jetfit.components.CustomCardWithIntensity
 import com.google.jetfit.components.CustomOutLinedButtonWithLeadingIcon
 import com.google.jetfit.data.entities.FavWorkout
 import com.google.jetfit.presentation.theme.onSurface
+import com.google.jetfit.presentation.theme.popupShadow
+import com.google.jetfit.presentation.theme.surfaceContainerHigh
 import com.google.jetfit.presentation.theme.surfaceVariant
+import com.google.jetfit.presentation.utils.shadowBox
 
 @Composable
 fun FavoritesScreen(
@@ -67,7 +71,6 @@ fun FavoritesScreen(
                 modifier = Modifier,
                 workoutsList = value.favoritesWorkouts,
                 onWorkoutSelect = favoritesViewModel::onWorkoutSelect,
-                workoutFocusRequester = workoutFocusRequester,
                 interaction = favoritesViewModel,
                 selectedItem = selectedItem,
                 onBackPressed = onBackPressed
@@ -92,7 +95,6 @@ private fun FavoritesScreenContent(
     workoutsList: List<FavWorkout>,
     selectedItem: FavWorkout? = null,
     interaction: FavoritesInteraction,
-    workoutFocusRequester: FocusRequester,
     onWorkoutSelect: (FavWorkout) -> Unit,
     onBackPressed: () -> Unit,
 ) {
@@ -113,9 +115,7 @@ private fun FavoritesScreenContent(
                 .fillMaxWidth()
                 .padding(vertical = 24.dp)
         ) {
-            items(
-                items = workoutsList, key = { it.id }
-            ) { item ->
+            items(items = workoutsList, key = { it.id }) { item ->
                 CustomCardWithIntensity(modifier = Modifier
                     .width(196.dp)
                     .padding(horizontal = 12.dp),
@@ -126,8 +126,7 @@ private fun FavoritesScreenContent(
                     intensityLevel = item.intensity,
                     onClick = {
                         onWorkoutSelect(item)
-                    }
-                )
+                    })
             }
         }
         AnimatedVisibility(
@@ -138,82 +137,107 @@ private fun FavoritesScreenContent(
             exit = fadeOut(
                 animationSpec = tween(300)
             ),
+        ) {
+            selectedItem?.let {
+                WorkoutDetailsPopup(
+                    workout = it,
+                    interaction = interaction,
+                    onBackPressed = onBackPressed
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalTvMaterial3Api::class)
+@Composable
+fun WorkoutDetailsPopup(
+    workout: FavWorkout,
+    interaction: FavoritesInteraction,
+    onBackPressed: () -> Unit
+) {
+    Dialog(onDismissRequest = onBackPressed) {
+        Box(
+            modifier = Modifier
+                .background(surfaceContainerHigh, RoundedCornerShape(16.dp))
+                .fillMaxWidth(0.75f)
+                .fillMaxHeight(0.8f)
+                .shadowBox(
+                    color = popupShadow,
+                    blurRadius = 40.dp,
+                    offset = DpOffset(0.dp, 8.dp)
+                )
+                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+        ) {
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .alpha(0.88f),
+                model = workout.image,
+                contentDescription = null,
+                contentScale = ContentScale.Inside
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(surfaceVariant.copy(alpha = 0.35f))
+                    .padding(horizontal = 24.dp), horizontalAlignment = Alignment.Start
             ) {
-            Dialog(onDismissRequest = onBackPressed) {
-                selectedItem?.let { workout ->
-                    Box(
-                        modifier = Modifier
-                            .background(surfaceVariant, RoundedCornerShape(16.dp))
-                            .fillMaxWidth(0.75f)
-                            .fillMaxHeight(0.8f)
-                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                    ) {
-                        AsyncImage(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .alpha(0.88f),
-                            model = workout.image,
-                            contentDescription = null,
-                            contentScale = ContentScale.Inside
-                        )
-                        Column(
-                            modifier = Modifier.fillMaxSize()
-                                .background(surfaceVariant.copy(alpha = 0.35f))
-                                .padding(horizontal = 24.dp),
-                            horizontalAlignment = Alignment.Start
-                        ) {
-                            Spacer(modifier = Modifier.fillMaxHeight(0.45f))
-                            Text(
-                                text = workout.name,
-                                textAlign = TextAlign.Justify,
-                                style = MaterialTheme.typography.titleMedium,
-                                color = onSurface,
-                                modifier = Modifier.padding(bottom = 8.dp),
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                            Row(
-                                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Start
-                            ) {
-                                Text(
-                                    text = "${workout.duration} | Intensity ",
-                                    modifier = Modifier,
-                                    textAlign = TextAlign.Justify,
-                                    style = MaterialTheme.typography.labelMedium,
-                                    color = onSurface,
-                                    overflow = TextOverflow.Ellipsis,
-                                    softWrap = true,
-                                    maxLines = 4
-                                )
-                                repeat(workout.intensity) { Text(text = "•") }
-                            }
-                            Text(
-                                text = workout.description,
-                                modifier = Modifier.padding(bottom = 28.dp),
-                                textAlign = TextAlign.Justify,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = Color.LightGray,
-                                overflow = TextOverflow.Ellipsis,
-                                softWrap = true,
-                                maxLines = 4
-                            )
-                            CustomOutLinedButtonWithLeadingIcon(
-                                text = "Start",
-                                icon = R.drawable.play_icon,
-                                modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp)
-                            ) {
-                                interaction.onStartWorkout(workout.id)
-                            }
-                            CustomOutLinedButtonWithLeadingIcon(
-                                text = "Remove from favorites",
-                                icon = R.drawable.icon_remove,
-                                modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp)
-                            ) {
-                                interaction.onRemoveWorkout(workout.id)
-                            }
-                        }
-                    }
+                Spacer(modifier = Modifier.fillMaxHeight(0.45f))
+                Text(
+                    text = workout.name,
+                    textAlign = TextAlign.Justify,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = onSurface,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    Text(
+                        text = "${workout.duration} | Intensity ",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Justify,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = onSurface,
+                        overflow = TextOverflow.Ellipsis,
+                        softWrap = true,
+                        maxLines = 4
+                    )
+                    repeat(workout.intensity) { Text(text = "•") }
+                }
+                Text(
+                    text = workout.description,
+                    modifier = Modifier.padding(bottom = 28.dp),
+                    textAlign = TextAlign.Justify,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.LightGray,
+                    overflow = TextOverflow.Ellipsis,
+                    softWrap = true,
+                    maxLines = 4
+                )
+                CustomOutLinedButtonWithLeadingIcon(
+                    text = "Start",
+                    icon = R.drawable.play_icon,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 12.dp)
+                ) {
+                    interaction.onStartWorkout(workout.id)
+                }
+                CustomOutLinedButtonWithLeadingIcon(
+                    text = "Remove from favorites",
+                    icon = R.drawable.icon_remove,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp)
+                ) {
+                    interaction.onRemoveWorkout(workout.id)
                 }
             }
         }
