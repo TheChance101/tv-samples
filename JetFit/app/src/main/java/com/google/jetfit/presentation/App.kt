@@ -12,6 +12,7 @@ import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
 import com.google.jetfit.presentation.screens.profileSelector.ProfileSelectorScreen
+import com.google.jetfit.presentation.screens.settings.SettingsScreen
 import com.google.jetfit.presentation.utils.navigateTo
 import com.google.jetfit.presentation.utils.navigationDrawerGraph
 
@@ -54,6 +55,12 @@ fun App(
                 route = Screens.ProfileSelector()
             ) {
                 ProfileSelectorScreen(onBackPressed = onBackPressed)
+            }
+
+            composable(
+                route = Screens.Settings()
+            ) {
+                SettingsScreen()
             }
         }
     )

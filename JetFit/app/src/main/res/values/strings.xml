@@ -19,4 +19,9 @@
     <string name="reset">Reset</string>
     <string name="clear">Clear</string>
     <string name="filters">Filters</string>
+
+    <!-- settings -->
+    <string name="settings">Settings</string>
+    <string name="app_settings">App Settings</string>
+    <string name="personal_settings">Personal</string>
 </resources>
