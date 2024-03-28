@@ -12,7 +12,6 @@ import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
 import com.google.jetfit.presentation.screens.profileSelector.ProfileSelectorScreen
-import com.google.jetfit.presentation.screens.subscription.SubscriptionScreen
 import com.google.jetfit.presentation.utils.navigateTo
 import com.google.jetfit.presentation.utils.navigationDrawerGraph
 
@@ -55,6 +54,22 @@ fun App(
                 route = Screens.ProfileSelector()
             ) {
                 ProfileSelectorScreen(onBackPressed = onBackPressed)
+            }
+
+            composable(
+                route = Screens.MoreOptions(),
+                arguments = listOf(
+                    navArgument(""){
+                        type = NavType.StringType
+                    }
+                )
+            ){
+                MoreOptionsScreen(onBackPressed = onBackPressed)
+            }
+            composable(
+                route = Screens.Favorite()
+            ){
+                FavoritesScreen(onBackPressed = onBackPressed)
             }
 
             composable(

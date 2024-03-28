@@ -94,6 +94,9 @@ dependencies {
     // ViewModel in Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    //lifecycle
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
     // Compose Navigation
     implementation(libs.androidx.navigation.compose)
 
@@ -107,4 +110,5 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
 
+    implementation(libs.constraint.layout)
 }

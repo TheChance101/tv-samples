@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ButtonDefaults
@@ -28,14 +29,18 @@ internal fun BackRowSchema(
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Text(
-            text = "Press",
+            text = stringResource(R.string.press),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         IconButton(
             modifier = Modifier.size(20.dp),
             colors = ButtonDefaults.colors(containerColor = MaterialTheme.colorScheme.onSurfaceVariant),
-            onClick = onClickBack
+            onClick = onClickBack,
+            scale = ButtonDefaults.scale(
+                scale = 1f,
+                focusedScale = 1.2f,
+            )
         ) {
             Icon(
                 modifier = Modifier.size(12.dp),
@@ -44,7 +49,7 @@ internal fun BackRowSchema(
             )
         }
         Text(
-            text = "to go back",
+            text = stringResource(R.string.to_go_back),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
