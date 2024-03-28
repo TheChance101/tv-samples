@@ -36,7 +36,6 @@ internal fun JFOutlineButton(
     @DrawableRes icon: Int = R.drawable.ic_rounded_play,
     onClick: () -> Unit = {}
 ) {
-
     OutlinedButton(
         modifier = modifier.height(40.dp),
         onClick = onClick,
@@ -48,40 +47,26 @@ internal fun JFOutlineButton(
         shape = ButtonDefaults.shape(shape = RoundedCornerShape(40.dp)),
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
     ) {
-        if (isIcon) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = if (isIcon) Arrangement.Start else Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            if (isIcon) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = "button icon",
                     tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = buttonText,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
-                    textAlign = TextAlign.Center
-                )
             }
-        } else {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = buttonText,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = buttonText,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
+            )
         }
-
     }
 }
 

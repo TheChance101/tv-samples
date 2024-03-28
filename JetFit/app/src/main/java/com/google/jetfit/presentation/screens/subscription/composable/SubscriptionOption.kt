@@ -1,5 +1,6 @@
 package com.google.jetfit.presentation.screens.subscription.composable
 
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -70,7 +71,7 @@ private fun SelectedSubscriptionOptionPreview() {
     JetFitTheme {
         SubscriptionOption(
             title = "1 Month Subscription",
-            description = "Start your 7-day free trial then \$7.99 / month. Subscription continues until cancelled",
+            description = "Start your 7-day free trial then \$7.99 / month.\nSubscription continues until cancelled",
             price = "$7.99",
             isSelected = true,
         )
@@ -83,7 +84,7 @@ private fun UnSelectedSubscriptionOptionPreview() {
     JetFitTheme {
         SubscriptionOption(
             title = "1 Month Subscription",
-            description = "Start your 7-day free trial then \$7.99 / month. Subscription continues until cancelled",
+            description = "Start your 7-day free trial then \$7.99 / month.\nSubscription continues until cancelled",
             price = "$7.99",
             isSelected = false,
         )

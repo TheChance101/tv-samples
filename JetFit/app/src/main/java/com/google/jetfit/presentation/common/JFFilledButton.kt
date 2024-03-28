@@ -36,7 +36,6 @@ internal fun JFFilledButton(
     @DrawableRes icon: Int = R.drawable.ic_rounded_play,
     onClick: () -> Unit = {}
 ) {
-
     Button(
         modifier = modifier.height(40.dp),
         onClick = onClick,
@@ -44,44 +43,28 @@ internal fun JFFilledButton(
         shape = ButtonDefaults.shape(shape = RoundedCornerShape(40.dp)),
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
     ) {
-        if (isIcon) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = if (isIcon) Arrangement.Start else Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            if (isIcon) {
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = "button icon",
                     tint = MaterialTheme.colorScheme.inverseOnSurface
                 )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = buttonText,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        lineHeight = 22.sp,
-                        fontWeight = FontWeight.W500,
-                    ),
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
-                    textAlign = TextAlign.Center
-                )
             }
-        } else {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = buttonText,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        lineHeight = 22.sp,
-                        fontWeight = FontWeight.W500,
-                    ),
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = buttonText,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    lineHeight = 22.sp,
+                    fontWeight = FontWeight.W500,
+                ),
+                color = MaterialTheme.colorScheme.inverseOnSurface,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }

@@ -15,8 +15,8 @@ sealed interface SubscriptionUiState {
                 if (periodTime == "1")
                     "${context.getString(R.string.month)}.\n"
                 else
-                    "$periodTime \n ${context.getString(R.string.months)}."
-            } ${context.getString(R.string.subscription_cancelled)}"
+                    "$periodTime \n${context.getString(R.string.months)}."
+            }${context.getString(R.string.subscription_cancelled)}"
         }
 
         fun formatPeriodTime(periodTime: String, context: Context): String {
