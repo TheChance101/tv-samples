@@ -1,8 +1,6 @@
 package com.google.jetfit.data.repositories
 
 import com.google.jetfit.data.entities.FavList
-import com.google.jetfit.data.entities.FavWorkout
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import com.google.jetfit.data.entities.Category
 import com.google.jetfit.data.entities.Profile
@@ -12,7 +10,6 @@ import com.google.jetfit.data.entities.Training
 import com.google.jetfit.data.entities.TrainingE
 import com.google.jetfit.data.entities.Workout
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 

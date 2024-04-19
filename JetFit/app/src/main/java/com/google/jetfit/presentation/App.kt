@@ -3,6 +3,10 @@ package com.google.jetfit.presentation
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,6 +21,7 @@ import com.google.jetfit.presentation.screens.profileSelector.ProfileSelectorScr
 import com.google.jetfit.presentation.utils.navigateTo
 import com.google.jetfit.presentation.utils.navigationDrawerGraph
 
+@OptIn(ExperimentalComposeUiApi::class)
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
 fun App(
@@ -27,6 +32,10 @@ fun App(
         navController = navController,
         route = "root_host",
         startDestination = Screens.ProfileSelector(),
+        modifier = Modifier
+            .semantics {
+                       testTagsAsResourceId = true
+            },
         builder = {
             navigationDrawerGraph(
                     onNavigateToRoot = navController::navigateTo,
