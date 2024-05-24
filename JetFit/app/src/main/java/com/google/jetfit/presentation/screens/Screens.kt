@@ -9,10 +9,12 @@ enum class Screens(
     val isNavigationDrawerItem: Boolean = false,
     val navigationDrawerIcon: Int? = null
 ) {
+    MoreOptions,
     VideoPlayer,
     AudioPlayer,
     Dashboard,
     ProfileSelector,
+    TrainingEntity,
     Search( isNavigationDrawerItem =true, navigationDrawerIcon = R.drawable.search_),
     Home( isNavigationDrawerItem = true, navigationDrawerIcon = R.drawable.home),
     Training( isNavigationDrawerItem = true, navigationDrawerIcon = R.drawable.fitness_center),
