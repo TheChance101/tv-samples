@@ -11,10 +11,13 @@ import androidx.navigation.navArgument
 import com.google.jetfit.presentation.screens.Screens
 import com.google.jetfit.presentation.screens.favorites.FavoritesScreen
 import com.google.jetfit.presentation.screens.more_options.MoreOptionsScreen
+import com.google.jetfit.presentation.screens.home.HomeScreen
+import com.google.jetfit.presentation.screens.more_options.MoreOptionsScreen
 import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
 import com.google.jetfit.presentation.screens.profileSelector.ProfileSelectorScreen
 import com.google.jetfit.presentation.screens.subscription.SubscriptionScreen
+import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityScreen
 import com.google.jetfit.presentation.utils.navigateTo
 import com.google.jetfit.presentation.utils.navigationDrawerGraph
 
@@ -73,6 +76,26 @@ fun App(
                 route = Screens.Favorite()
             ){
                 FavoritesScreen(onBackPressed = onBackPressed)
+            }
+            composable(
+                route = Screens.Home(),
+                arguments = listOf(
+                    navArgument("") {
+                        type = NavType.StringType
+                    }
+                )
+            ) {
+                HomeScreen()
+            }
+            composable(
+                route = Screens.TrainingEntity(),
+                arguments = listOf(
+                    navArgument("") {
+                        type = NavType.StringType
+                    }
+                )
+            ) {
+                TrainingEntityScreen()
             }
 
             composable(
