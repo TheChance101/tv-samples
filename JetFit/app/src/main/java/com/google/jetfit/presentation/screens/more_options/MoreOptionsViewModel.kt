@@ -2,7 +2,7 @@ package com.google.jetfit.presentation.screens.more_options
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.jetfit.data.repositories.JetFitRepository
+import com.google.jetfit.data.repository.JetFitRepository
 import com.google.jetfit.data.util.Result
 import com.google.jetfit.data.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.google.jetfit.data.repositories
+package com.google.jetfit.data.repository
 
 import com.google.jetfit.data.entities.FavWorkout
 import kotlin.random.Random

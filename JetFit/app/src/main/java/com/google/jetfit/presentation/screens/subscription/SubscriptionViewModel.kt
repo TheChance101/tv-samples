@@ -4,18 +4,18 @@ package com.google.jetfit.presentation.screens.subscription
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.jetfit.data.entities.Subscription
-import com.google.jetfit.data.repositories.JetFitRepository
+import com.google.jetfit.data.repository.JetFitRepository
+import com.google.jetfit.data.util.Result
 import com.google.jetfit.data.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import javax.inject.Inject
-import com.google.jetfit.data.util.Result
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class SubscriptionViewModel @Inject constructor(
