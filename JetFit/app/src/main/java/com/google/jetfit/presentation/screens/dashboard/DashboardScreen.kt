@@ -21,6 +21,7 @@ import com.google.jetfit.presentation.screens.player.audio.AudioPlayerScreen
 import com.google.jetfit.presentation.screens.player.video.VideoPlayerScreen
 import com.google.jetfit.presentation.screens.search.SearchScreen
 import com.google.jetfit.presentation.screens.settings.SettingsScreen
+import com.google.jetfit.presentation.screens.subscription.SubscriptionScreen
 import com.google.jetfit.presentation.screens.training.TrainingScreen
 import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityScreen
 
@@ -90,6 +91,16 @@ fun DashboardScreen(
                         onBackPressed = onBackPressed,
                         onFavouriteClick = {
                             navController.navigate(Screens.Favorite())
+                        }
+                    )
+                }
+                composable(Screens.Subscription()){
+                    SubscriptionScreen(
+                        onSubscribeClick = {
+                            navController.navigate(Screens.ProfileSelector())
+                        },
+                        onRestorePurchasesClick = {
+                            navController.navigate(Screens.ProfileSelector())
                         }
                     )
                 }

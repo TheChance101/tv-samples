@@ -10,8 +10,11 @@ import java.util.Date
 import javax.inject.Inject
 
 class ChallengesRepositoryImpl @Inject constructor(
-    private val getWorkouts: () -> List<Workout>
 ) : ChallengesRepository{
+    private val getWorkouts: () -> List<Workout>
+        get() = {
+            listOf<Workout>()
+        }
 
     override fun getChallenges(): List<Challenge> =
         listOf(

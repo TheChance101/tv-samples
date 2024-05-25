@@ -58,7 +58,9 @@ fun App(
             composable(
                 route = Screens.ProfileSelector()
             ) {
-                ProfileSelectorScreen(onBackPressed = onBackPressed)
+                ProfileSelectorScreen(
+                    onSignInClick = { navController.navigate(Screens.Subscription()) }
+                )
             }
 
             composable(
@@ -110,16 +112,6 @@ fun App(
             }
 
             composable(
-                route = Screens.Subscription(),
-                arguments = listOf(
-                    navArgument("") {
-                        type = NavType.StringType
-                    }
-                )
-            ) {
-                SubscriptionScreen(onBackPressed = onBackPressed)
-            }
-            composable(
                 route = Screens.TrainingEntity(),
                 arguments = listOf(
                     navArgument("") {
@@ -131,6 +123,14 @@ fun App(
                     onClickStart = {
                         navController.navigate(Screens.VideoPlayer())
                     }
+                )
+            }
+            composable(
+                route = Screens.Subscription(),
+            ) {
+                SubscriptionScreen(
+                    onSubscribeClick = { navController.navigate(Screens.ProfileSelector()) },
+                    onRestorePurchasesClick = { navController.navigate(Screens.ProfileSelector()) }
                 )
             }
         }

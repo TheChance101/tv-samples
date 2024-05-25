@@ -1,14 +1,18 @@
 package com.google.jetfit.data.repository.workout
 
+import com.google.jetfit.data.entities.FavList
 import com.google.jetfit.data.entities.Intensity
 import com.google.jetfit.data.entities.Language
 import com.google.jetfit.data.entities.SubtitleLanguage
 import com.google.jetfit.data.entities.Workout
 import com.google.jetfit.data.entities.WorkoutType
+import kotlinx.coroutines.flow.flow
 import java.util.Date
 import javax.inject.Inject
 
 class WorkoutRepositoryImpl @Inject constructor() : WorkoutRepository {
+
+    private val dummyWorkoutData: DummyWorkoutData = DummyWorkoutData()
     override fun getWorkouts(): List<Workout> = listOf(
         Workout(
             "1",
@@ -88,5 +92,9 @@ class WorkoutRepositoryImpl @Inject constructor() : WorkoutRepository {
     )
 
     override fun getWorkoutById(id: String): Workout = getWorkouts().first { it.id == id }
+    override fun getFavoritesWorkouts() = flow {
+        emit(FavList(value = dummyWorkoutData.list))
+    }
+
 
 }

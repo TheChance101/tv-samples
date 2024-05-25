@@ -4,7 +4,7 @@ package com.google.jetfit.presentation.screens.subscription
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.jetfit.data.entities.Subscription
-import com.google.jetfit.data.repository.JetFitRepository
+import com.google.jetfit.data.repository.instructor.InstructorRepository
 import com.google.jetfit.data.util.Result
 import com.google.jetfit.data.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SubscriptionViewModel @Inject constructor(
-    private val jetFitRepository: JetFitRepository
+    private val instructorRepository: InstructorRepository
 ) : ViewModel() {
 
     private val _instructorImageState = MutableStateFlow("")
@@ -31,13 +31,13 @@ class SubscriptionViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _instructorImageState.value = jetFitRepository.getInstructorImageById("1")
+            _instructorImageState.value = instructorRepository.getInstructorImageById("1")
         }
     }
 
 
     val uiState: StateFlow<SubscriptionUiState> =
-        jetFitRepository.getSubscriptionOptionsByInstructorId("1")
+        instructorRepository.getSubscriptionOptionsByInstructorId("1")
             .asResult()
             .map {
                 when (it) {
