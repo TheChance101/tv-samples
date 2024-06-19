@@ -56,7 +56,11 @@ fun DashboardScreen(
                     )
                 }
                 composable(Screens.Training()) {
-                    TrainingScreen()
+                    TrainingScreen(
+                        onClickItem = {
+                            navController.navigate(Screens.TrainingEntity())
+                        }
+                    )
                 }
                 composable(Screens.Favorite()) {
                     FavoritesScreen(
