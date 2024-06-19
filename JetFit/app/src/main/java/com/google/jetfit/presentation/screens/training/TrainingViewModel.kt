@@ -19,12 +19,26 @@ class TrainingViewModel  @Inject constructor(
     val state = _state.asStateFlow()
     init{
         getInstructors()
+        getWorkout()
     }
 
     private fun getInstructors() {
         viewModelScope.launch {
             val result =instructorRepository.getInstructors()
             _state.update { it.copy(instructorList = result,filterSideMenuUiState= it.filterSideMenuUiState.copy(instructor = result.first()) ) }
+        }
+    }
+
+    private fun getWorkout() {
+        viewModelScope.launch {
+            val result = jetFitRepository.getWorkouts()
+            _state.update {
+                it.copy(
+                    workouts = result,
+
+//                    filterSideMenuUiState = it.filterSideMenuUiState.copy(instructor = result.first())
+                )
+            }
         }
     }
 
@@ -41,5 +55,13 @@ class TrainingViewModel  @Inject constructor(
 
     fun onSelectedSortedItem(sortItemIndex: Int) {
         _state.update { it.copy(selectedSortItem = sortItemIndex)}
+    }
+
+    fun onChangeSelectedTab(index: Int) {
+        _state.update { it.copy(selectedTab = index) }
+    }
+
+    fun onChangeFocusTab(index: Int) {
+        _state.update { it.copy(focusTabIndex = index) }
     }
 }
