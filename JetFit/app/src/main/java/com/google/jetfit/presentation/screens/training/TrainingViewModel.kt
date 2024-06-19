@@ -3,6 +3,7 @@ package com.google.jetfit.presentation.screens.training
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.jetfit.data.repository.instructor.InstructorRepository
+import com.google.jetfit.data.repository.workout.WorkoutRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrainingViewModel  @Inject constructor(
-    private val instructorRepository: InstructorRepository
+    private val instructorRepository: InstructorRepository,
+    private val workoutRepository: WorkoutRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(TrainingUiState())
@@ -31,7 +33,7 @@ class TrainingViewModel  @Inject constructor(
 
     private fun getWorkout() {
         viewModelScope.launch {
-            val result = jetFitRepository.getWorkouts()
+            val result = workoutRepository.getWorkouts()
             _state.update {
                 it.copy(
                     workouts = result,
