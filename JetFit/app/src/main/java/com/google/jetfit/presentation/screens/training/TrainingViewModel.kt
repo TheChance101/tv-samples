@@ -36,9 +36,7 @@ class TrainingViewModel  @Inject constructor(
             val result = workoutRepository.getWorkouts()
             _state.update {
                 it.copy(
-                    workouts = result,
-
-//                    filterSideMenuUiState = it.filterSideMenuUiState.copy(instructor = result.first())
+                    workouts = result
                 )
             }
         }

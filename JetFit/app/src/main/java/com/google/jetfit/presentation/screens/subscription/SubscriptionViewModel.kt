@@ -31,13 +31,13 @@ class SubscriptionViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _instructorImageState.value = instructorRepository.getInstructorImageById("1")
+            _instructorImageState.value = instructorRepository.getInstructorImageById(INSTRUCTOR_ID)
         }
     }
 
 
     val uiState: StateFlow<SubscriptionUiState> =
-        instructorRepository.getSubscriptionOptionsByInstructorId("1")
+        instructorRepository.getSubscriptionOptionsByInstructorId(INSTRUCTOR_ID)
             .asResult()
             .map {
                 when (it) {
@@ -60,5 +60,9 @@ class SubscriptionViewModel @Inject constructor(
 
     fun updateSelectedSubscriptionOption(subscriptionOption: Subscription) {
         _selectedSubscriptionOption.value = subscriptionOption
+    }
+
+    companion object {
+        private const val INSTRUCTOR_ID = "1"
     }
 }
