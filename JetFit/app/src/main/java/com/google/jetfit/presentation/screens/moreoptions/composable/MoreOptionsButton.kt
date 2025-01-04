@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.more_options.composable
+package com.google.jetfit.presentation.screens.moreoptions.composable
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.PaddingValues

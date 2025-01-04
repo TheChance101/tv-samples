@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.training.training_entities
+package com.google.jetfit.presentation.screens.training.trainingentities
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
@@ -13,9 +13,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.jetfit.presentation.screens.training.training_entities.composables.ChallengeTabs
-import com.google.jetfit.presentation.screens.training.training_entities.composables.RoundedGradientImage
-import com.google.jetfit.presentation.screens.training.training_entities.composables.TrainingEntityDetails
+import com.google.jetfit.presentation.screens.training.trainingentities.composables.ChallengeTabs
+import com.google.jetfit.presentation.screens.training.trainingentities.composables.RoundedGradientImage
+import com.google.jetfit.presentation.screens.training.trainingentities.composables.TrainingEntityDetails
 
 @Composable
 fun TrainingEntityScreen(

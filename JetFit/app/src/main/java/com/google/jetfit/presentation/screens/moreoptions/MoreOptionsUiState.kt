@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.more_options
+package com.google.jetfit.presentation.screens.moreoptions
 
 import com.google.jetfit.data.entities.TrainingDetails
 

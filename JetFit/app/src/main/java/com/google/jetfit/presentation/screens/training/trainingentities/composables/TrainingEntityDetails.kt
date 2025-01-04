@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.training.training_entities.composables
+package com.google.jetfit.presentation.screens.training.trainingentities.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -24,13 +24,13 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.OutlinedButton
 import androidx.tv.material3.Text
 import com.google.jetfit.R
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState.ContentType.CHALLENGES
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState.ContentType.ROUTINE
-import com.google.jetfit.presentation.screens.training.training_entities.getSecondaryButtonID
-import com.google.jetfit.presentation.screens.training.training_entities.getSecondaryButtonIcon
-import com.google.jetfit.presentation.screens.training.training_entities.getStartButtonID
-import com.google.jetfit.presentation.screens.training.training_entities.isSecondaryButtonVisible
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState.ContentType.CHALLENGES
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState.ContentType.ROUTINE
+import com.google.jetfit.presentation.screens.training.trainingentities.getSecondaryButtonID
+import com.google.jetfit.presentation.screens.training.trainingentities.getSecondaryButtonIcon
+import com.google.jetfit.presentation.screens.training.trainingentities.getStartButtonID
+import com.google.jetfit.presentation.screens.training.trainingentities.isSecondaryButtonVisible
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable

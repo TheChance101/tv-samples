@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.training.training_entities
+package com.google.jetfit.presentation.screens.training.trainingentities
 
 sealed class TrainingEntityPages {
     data object EntityDetails : TrainingEntityPages()
