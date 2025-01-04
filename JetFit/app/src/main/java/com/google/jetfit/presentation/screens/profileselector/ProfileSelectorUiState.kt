@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.profileSelector
+package com.google.jetfit.presentation.screens.profileselector
 
 import javax.annotation.concurrent.Immutable
 

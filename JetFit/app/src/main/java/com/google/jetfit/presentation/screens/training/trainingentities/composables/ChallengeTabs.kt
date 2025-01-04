@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.training.training_entities.composables
+package com.google.jetfit.presentation.screens.training.trainingentities.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,7 +32,7 @@ import androidx.tv.material3.TabRow
 import androidx.tv.material3.Text
 import com.google.jetfit.R
 import com.google.jetfit.components.CustomCard
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState
 
 @OptIn(ExperimentalTvMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable

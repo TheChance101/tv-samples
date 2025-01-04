@@ -1,10 +1,10 @@
-package com.google.jetfit.presentation.screens.training.training_entities
+package com.google.jetfit.presentation.screens.training.trainingentities
 
 import com.google.jetfit.R
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState.ContentType.CHALLENGES
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState.ContentType.ROUTINE
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState.ContentType.SERIES
-import com.google.jetfit.presentation.screens.training.training_entities.TrainingEntityUiState.ContentType.WORK_OUT
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState.ContentType.CHALLENGES
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState.ContentType.ROUTINE
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState.ContentType.SERIES
+import com.google.jetfit.presentation.screens.training.trainingentities.TrainingEntityUiState.ContentType.WORK_OUT
 
 data class TrainingEntityUiState(
     val contentType: ContentType = ROUTINE,

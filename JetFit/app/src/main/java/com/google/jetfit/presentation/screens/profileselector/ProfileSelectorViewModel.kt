@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.profileSelector
+package com.google.jetfit.presentation.screens.profileselector
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

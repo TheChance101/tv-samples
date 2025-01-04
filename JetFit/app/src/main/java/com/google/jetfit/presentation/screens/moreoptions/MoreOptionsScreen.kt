@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.more_options
+package com.google.jetfit.presentation.screens.moreoptions
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.jetfit.R
-import com.google.jetfit.presentation.screens.more_options.composable.BackRowSchema
-import com.google.jetfit.presentation.screens.more_options.composable.MoreOptionsButton
-import com.google.jetfit.presentation.screens.more_options.composable.TrainingDetails
+import com.google.jetfit.presentation.screens.moreoptions.composable.BackRowSchema
+import com.google.jetfit.presentation.screens.moreoptions.composable.MoreOptionsButton
+import com.google.jetfit.presentation.screens.moreoptions.composable.TrainingDetails
 
 
 @Composable

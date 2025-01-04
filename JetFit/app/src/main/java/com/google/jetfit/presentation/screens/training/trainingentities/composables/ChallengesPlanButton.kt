@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.training.training_entities.composables
+package com.google.jetfit.presentation.screens.training.trainingentities.composables
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.updateTransition

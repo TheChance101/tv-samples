@@ -1,4 +1,4 @@
-package com.google.jetfit.presentation.screens.training.training_entities
+package com.google.jetfit.presentation.screens.training.trainingentities
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
